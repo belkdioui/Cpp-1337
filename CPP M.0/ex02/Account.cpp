@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:41:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/21 19:39:04 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/09/22 08:33:28 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,44 @@ void    Account::displayStatus( void ) const
 {
     std::cout <<"index:" << _accountIndex << ";"
             << "amount:" << _amount <<";deposits:"
-         <<getNbDeposits()<<";withdrawals:"
-         <<getNbWithdrawals()<<std::endl;
+         <<_nbDeposits<<";withdrawals:"
+         <<_nbWithdrawals<<std::endl;
 }
 
 void Account::makeDeposit(int deposit)
 {
-    static int i;
-    _nbDeposits = deposit;
+         _nbDeposits++;
     std::cout <<"index:" << _accountIndex << ";"
             << "p_amount:" << _amount <<";deposit:"
-         <<_nbDeposits<<";amount:"<<_amount+_nbDeposits<<";nb_deposits:"
-         <<i<<std::endl;
+         <<deposit<<";amount:"<<_amount+deposit<<";nb_deposits:"
+         <<_nbDeposits<<std::endl;
+         _totalAmount += deposit;
+         _amount += deposit;
          _totalNbDeposits++;
-         i++;
 }
 
 bool	Account::makeWithdrawal( int withdrawal )
 {
-    _nbWithdrawals = withdrawal;
     std::cout <<"index:" << _accountIndex << ";"
-            << "p_amount:" << _amount <<";deposit:"
-         <<_nbDeposits<<";withdrawals:";
-         if (_nbWithdrawals > _amount)
+            << "p_amount:" << _amount <<";withdrawal:";
+         if (withdrawal > _amount)
         {
             std::cout<< "refused"<<std::endl;
             return(false);
         }
-         std::cout<<_nbWithdrawals<<std::endl;
+         std::cout<<withdrawal<<";amount:" << _amount - withdrawal << ";nb_withdrawals:"<<_nbWithdrawals<<std::endl;;
+         _amount -= withdrawal ;
+         _totalAmount -= withdrawal;
+         _nbWithdrawals++;
          _totalNbWithdrawals++;
+         
     return true;
 }
 Account::~Account()
 {
-    
+    std::cout <<"index:" << _accountIndex << ";"
+            << "amount:" << _amount << ";" << "closed"
+            << std::endl;
 }
 int	Account::getNbAccounts( void )
 {
