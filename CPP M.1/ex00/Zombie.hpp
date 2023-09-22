@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:57:21 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/22 10:51:00 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:19:22 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,4 @@ public:
 };
 
 Zombie* newZombie(std::string name);
-void randomChump( std::string name );
+void    randomChump( std::string name );
