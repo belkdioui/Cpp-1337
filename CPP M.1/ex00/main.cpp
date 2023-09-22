@@ -6,12 +6,11 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:22:45 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/22 11:19:15 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:27:51 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-#include <cstdlib>
 
 int main()
 {
