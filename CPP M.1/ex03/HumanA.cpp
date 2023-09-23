@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 11:44:46 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/22 17:27:59 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/09/22 18:29:17 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/09/23 16:02:38 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "HumanA.hpp"
 
-int main()
+void    HumanA::attack()
 {
-    std::string str="HI THIS IS BRAIN";
-    std::string* stringPTR=&str;
-    std::string& stringREF=str;
+    std::cout<<name<<" attacks with their "<<weaponHa.getType()<<std::endl;
+}
 
-    std::cout << &str<<std::endl;
-    std::cout << &stringPTR<<std::endl;
-    std::cout << &stringREF<<std::endl;
+HumanA::HumanA(std::string Name, Weapon &WeaponHa):weaponHa(WeaponHa)
+{
+    name = Name;
+}
+
+HumanA::~HumanA()
+{
     
-    std::cout << str<<std::endl;
-    std::cout << stringPTR<<std::endl;
-    std::cout << stringREF<<std::endl;  
+}
+
+void    HumanA::setName(std::string n)
+{
+    name = n;
+}
+
+std::string HumanA::getName()
+{
+    return name;
 }

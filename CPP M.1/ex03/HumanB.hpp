@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 11:44:46 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/22 17:27:59 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/09/22 18:27:31 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/09/23 16:03:17 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Weapon.hpp"
 #include <iostream>
 
-int main()
-{
-    std::string str="HI THIS IS BRAIN";
-    std::string* stringPTR=&str;
-    std::string& stringREF=str;
+#ifndef HUMANB_HPP
+#define HUMANB_HPP
 
-    std::cout << &str<<std::endl;
-    std::cout << &stringPTR<<std::endl;
-    std::cout << &stringREF<<std::endl;
-    
-    std::cout << str<<std::endl;
-    std::cout << stringPTR<<std::endl;
-    std::cout << stringREF<<std::endl;  
-}
+class HumanB
+{
+private:
+    std::string name;
+    Weapon *weaponHb;
+public:
+    HumanB(std::string name);
+    ~HumanB();
+    void    setName(std::string n);
+    std::string getName() const;
+    void attack();
+    void setWeapon(Weapon &weapon);
+};
+#endif

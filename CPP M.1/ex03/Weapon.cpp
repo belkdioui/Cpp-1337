@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 11:44:46 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/22 17:27:59 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/09/22 17:33:52 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/09/23 16:09:46 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Weapon.hpp"
+#include "HumanB.hpp"
+#include "HumanA.hpp"
 
-int main()
+Weapon::Weapon()
 {
-    std::string str="HI THIS IS BRAIN";
-    std::string* stringPTR=&str;
-    std::string& stringREF=str;
+    std::cout << "Weapon has been constructed" << std::endl;
+}
+Weapon::Weapon(std::string Type)
+{
+    type = Type;
+}
 
-    std::cout << &str<<std::endl;
-    std::cout << &stringPTR<<std::endl;
-    std::cout << &stringREF<<std::endl;
-    
-    std::cout << str<<std::endl;
-    std::cout << stringPTR<<std::endl;
-    std::cout << stringREF<<std::endl;  
+Weapon::~Weapon()
+{
+}
+
+void    Weapon::setType(std::string t)
+{
+    type = t;
+}
+
+std::string Weapon::getType()
+{
+    return type;
 }
