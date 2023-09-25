@@ -5,30 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/16 16:59:37 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/09/24 18:16:32 by bel-kdio         ###   ########.fr        #
+#    Created: 2023/09/24 08:13:11 by bel-kdio          #+#    #+#              #
+#    Updated: 2023/09/24 08:13:29 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = c++
+CC = clang++
 
-NAME = megaphone
+SRC = main.cpp Harl.cpp
 
-SRC = megaphone.cpp
+NAME = loser
 
 OBJ = $(SRC:.cpp=.o)
 
 RM = rm -rf
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98 
 
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
-%.o: %.cpp
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+%.o:%.cpp
 	$(CC) $(CFLAGS) $< -c -o $@
-	
+
 clean :
 	$(RM) $(OBJ)
 
