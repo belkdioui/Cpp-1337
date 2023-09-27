@@ -6,11 +6,22 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:41:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/22 08:33:28 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:26:53 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
+#include <ctime>
+
+void print_the_cuu_time()
+{
+    std::time_t currTime;
+    std::time(&currTime);
+
+    char strTime[16];
+    std::strftime(strTime, sizeof(strTime), "%Y%m%d_%H%M%S", std::localtime(&currTime));
+    std::cout<<"["<<strTime<<"] ";
+}
 
 int Account::_nbAccounts = 0;
 int	Account::_totalAmount = 0;
@@ -19,6 +30,7 @@ int	Account::_totalNbWithdrawals = 0;
 
 Account::Account(int initial_deposit)
 {
+    print_the_cuu_time();
     _accountIndex = _nbAccounts;
     _amount = initial_deposit;
     std::cout <<"index:" << _accountIndex << ";"
@@ -30,6 +42,7 @@ Account::Account(int initial_deposit)
 
 void    Account::displayStatus( void ) const
 {
+    print_the_cuu_time();
     std::cout <<"index:" << _accountIndex << ";"
             << "amount:" << _amount <<";deposits:"
          <<_nbDeposits<<";withdrawals:"
@@ -38,6 +51,7 @@ void    Account::displayStatus( void ) const
 
 void Account::makeDeposit(int deposit)
 {
+    print_the_cuu_time();
          _nbDeposits++;
     std::cout <<"index:" << _accountIndex << ";"
             << "p_amount:" << _amount <<";deposit:"
@@ -50,6 +64,7 @@ void Account::makeDeposit(int deposit)
 
 bool	Account::makeWithdrawal( int withdrawal )
 {
+    print_the_cuu_time();
     std::cout <<"index:" << _accountIndex << ";"
             << "p_amount:" << _amount <<";withdrawal:";
          if (withdrawal > _amount)
@@ -67,6 +82,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 }
 Account::~Account()
 {
+    print_the_cuu_time();
     std::cout <<"index:" << _accountIndex << ";"
             << "amount:" << _amount << ";" << "closed"
             << std::endl;
@@ -92,7 +108,8 @@ int	getNbDeposits( void );
 int	getNbWithdrawals( void );
 void    Account::displayAccountsInfos(void)
 {
-    std::cout <<"account:"<<_nbAccounts<<";"
+    print_the_cuu_time();
+    std::cout <<"accounts:"<<_nbAccounts<<";"
          <<"total:"<<getTotalAmount()<<";deposits:"
          <<getNbDeposits()<<";withdrawals:"
          <<getNbWithdrawals()<<std::endl;

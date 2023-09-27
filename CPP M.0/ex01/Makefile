@@ -6,7 +6,7 @@
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 16:59:37 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/09/21 15:15:33 by bel-kdio         ###   ########.fr        #
+#    Updated: 2023/09/27 14:55:45 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = clang++
 
 NAME = PhoneBook
 
-SRC = main.cpp, utils.cpp
+SRC = main.cpp utils.cpp Contact.cpp PhoneBook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
