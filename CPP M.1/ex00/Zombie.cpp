@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:56:09 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/22 11:07:23 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/03 08:42:33 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void    Zombie::announce(void)
     std::cout<<getZombie()<<": BraiiiiiiinnnzzzZ..."<<std::endl;
 }
 
-Zombie::Zombie(/* args */)
+Zombie::Zombie()
 {
+    name = "";
 }
 
 Zombie::~Zombie()

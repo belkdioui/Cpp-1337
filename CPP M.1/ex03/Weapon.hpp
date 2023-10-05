@@ -6,13 +6,13 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:04:31 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/23 16:08:58 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/04 08:35:18 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #ifndef WEAPON_HPP
 #define WEAPON_HPP
+#include <iostream>
 
 class Weapon
 {
@@ -23,6 +23,6 @@ public:
     Weapon(std::string Type);
     ~Weapon();
     void    setType(std::string);
-    std::string    getType();
+    const   std::string& getType() const;
 };
 #endif

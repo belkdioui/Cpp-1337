@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 08:50:44 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/24 16:25:47 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/04 09:45:05 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,10 @@ void    Harl::complain(std::string level)
     void    (Harl::*ptr[4])(void);
     int i = 0;
     std::string arr[4]={"DEBUG","INFO","WARNING","ERROR"};
-    // void(*functions[4])()= {Harl::debug()};
-
     ptr[0] = &Harl::debug;
-    ptr[1] =&Harl::info;
-    ptr[2] =&Harl::warning; 
-    ptr[3] =&Harl::error;
-    // i = abs((int) level.length() - 5) + 3 * (level.at(0) == 'E') ;
+    ptr[1] = &Harl::info;
+    ptr[2] = &Harl::warning; 
+    ptr[3] = &Harl::error;
     while(i < 4)
     {
         if (arr[i] == level)
@@ -54,20 +51,8 @@ void    Harl::complain(std::string level)
         }
         i++;
     }
-    // (this->*ptr[i])();
-
     std::cout<<"NO level"<<std::endl;
-    
 }
-//    switch (n) {
-//     case 1:
-//         debug();
-//         break;
-//     case 2:
-//         warning();
-   
-//    }
-
 Harl::Harl()
 {
     

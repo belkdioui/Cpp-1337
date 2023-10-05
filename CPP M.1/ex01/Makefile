@@ -6,7 +6,7 @@
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/22 11:25:40 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/09/22 11:26:22 by bel-kdio         ###   ########.fr        #
+#    Updated: 2023/10/04 10:28:44 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+%.o:%.cpp %.hpp
+	$(CC) $(CFLAGS) $< -c -o $@
 
 %.o:%.cpp
 	$(CC) $(CFLAGS) $< -c -o $@

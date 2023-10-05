@@ -6,9 +6,14 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 08:00:11 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/23 15:37:11 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/04 08:43:46 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LOSER_H
+#define LOSER_H
+
 #include <iostream>
 #include <fstream>
+#include <string>
+#endif

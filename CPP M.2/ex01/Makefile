@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/22 09:52:33 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/10/04 10:26:52 by bel-kdio         ###   ########.fr        #
+#    Created: 2023/10/04 15:42:44 by bel-kdio          #+#    #+#              #
+#    Updated: 2023/10/04 17:51:34 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang++
 
-SRC = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+SRC = main.cpp Fixed.cpp
 
-NAME = BraiiiiiiinnnzzzZ
+NAME = OrthodoxCanonical
 
 OBJ = $(SRC:.cpp=.o)
 

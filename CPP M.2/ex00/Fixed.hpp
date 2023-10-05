@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 11:27:21 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/04 16:21:38 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/04 15:50:58 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/05 11:19:40 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <cstdlib>
+#ifndef FIXED_H
+#define FIXED_H
 
-int main()
+#include<iostream>
+
+class Fixed
 {
-    Zombie *zz = zombieHorde( 10, "badre" );
+    int RawBits;
+    static const int fractionalBIts = 8;
     
-    for(int i = 0;i<10;i++)
-    {
-        zz[i].announce();
-    }
-    // system("leaks moarBrainz");
-    delete[]zz;
-}
+    public: 
+        Fixed();
+        Fixed(const Fixed& other);
+        Fixed& operator=(const Fixed& other);
+        ~Fixed();
+        int getRawBits(void) const;
+        void setRawBits( int const raw);
+};
+
+#endif

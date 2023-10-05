@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:29:17 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/09/23 10:21:08 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/09/27 20:33:44 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    HumanB::setName(std::string n)
     name = n;
 }
 
-std::string HumanB::getName()
+std::string HumanB::getName() const
 {
     return name;
 }
