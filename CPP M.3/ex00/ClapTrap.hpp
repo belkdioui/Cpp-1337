@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 15:50:58 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/07 12:22:46 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/09 13:00:00 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/09 14:47:32 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_H
-#define FIXED_H
+#ifndef CLAPTRAP_H
+#define CLAPTRAP_H
 
 #include<iostream>
 
-class Fixed
+class ClapTrap
 {
-    int RawBits;
-    static const int fractionalBIts = 8;
+    std::string Name;
+    int HitPoints;
+    int EnergyPoints;
+    int AttackDamage;
     
-    public: 
-        Fixed();
-        Fixed(const Fixed& other);
-        Fixed& operator=(const Fixed& other);
-        ~Fixed();
-        int getRawBits(void) const;
-        void setRawBits( int const raw);
+    public:
+        ClapTrap();
+        ClapTrap(std::string str);
+        void attack(const std::string& target);
+        void takeDamage(unsigned int amount);
+        void beRepaired(unsigned int amount);
+        ~ClapTrap();
 };
+
+
+
+
 
 #endif

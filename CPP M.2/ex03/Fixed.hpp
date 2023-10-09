@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:50:58 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/08 10:31:57 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:16:00 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@ class Fixed
         Fixed(const float floating);
         Fixed(const Fixed& other);
         Fixed& operator=(const Fixed& other);
+        bool operator>(const Fixed& other);
+        bool operator<(const Fixed& other);
+        bool operator<=(const Fixed& other); 
+        bool operator>=(const Fixed& other); 
+        bool operator==(const Fixed& other); 
+        bool operator!=(const Fixed& other);
+        Fixed& operator+(const Fixed& other);
+        Fixed& operator*(const Fixed& other);
+        Fixed& operator/(const Fixed& other);
+        Fixed& operator-(const Fixed& other);
+        Fixed& operator++();
+        Fixed operator++(int);
+        Fixed& operator--();
+        Fixed operator--(int);
+        static Fixed& min(Fixed& FixedPoint0, Fixed& FixedPoint1);
+        static const Fixed& min(const Fixed& FixedPoint0, const Fixed& FixedPoint1);
+        static Fixed& max(Fixed& FixedPoint0, Fixed& FixedPoint1);
+        static const Fixed& max(const Fixed& FixedPoint0, const Fixed& FixedPoint1);
         float toFloat(void) const;
         int   toInt(void) const;
         ~Fixed();

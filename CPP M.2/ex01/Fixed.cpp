@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:00:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/05 17:39:49 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/08 09:45:27 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ Fixed::Fixed()
 }
 Fixed::Fixed(const Fixed& other)
 {
-    RawBits = other.RawBits;
+    // RawBits = other.RawBits;
     std::cout<<"Copy constructor called"<<std::endl;
+    *this = other;
 }
 
 Fixed::Fixed(const int integer)
@@ -31,25 +32,21 @@ Fixed::Fixed(const int integer)
 
 Fixed::Fixed(const float floating)
 {
-    RawBits = floating *(pow(2,fractionalBIts));
-    std::cout<<"Float constructor called"<<std::endl;
+    RawBits = roundf(floating *(pow(2,fractionalBIts)));
+    std::cout<<"Float constructor called"<< std::endl;
 }
 
 float Fixed::toFloat(void) const
 {
     float test;
     test = (float)RawBits * (pow(2,-8));
-    std::cout << test<<std::endl;
     return test;
-    // std::cout << (float)RawBits /(pow(10,(float)fractionalBIts / 4))<<std::endl;
-    // return ((float) RawBits);
 }
 
 int Fixed::toInt(void) const
 {
     int test;
     test = RawBits >> fractionalBIts;
-    std::cout << test<<std::endl;
     return test;
 }
 
@@ -72,4 +69,10 @@ int Fixed::getRawBits(void) const
 {
     std::cout<<"getRawBits member function called"<<std::endl;
     return RawBits;
+}
+
+std::ostream& operator<<(std::ostream& output, const Fixed& obj)
+{
+    output<<obj.toFloat();
+    return output;
 }

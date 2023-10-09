@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 15:50:58 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/07 12:22:46 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/09 12:59:54 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/09 17:24:41 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_H
-#define FIXED_H
+#include "ClapTrap.hpp"
 
-#include<iostream>
-
-class Fixed
+int main()
 {
-    int RawBits;
-    static const int fractionalBIts = 8;
-    
-    public: 
-        Fixed();
-        Fixed(const Fixed& other);
-        Fixed& operator=(const Fixed& other);
-        ~Fixed();
-        int getRawBits(void) const;
-        void setRawBits( int const raw);
-};
-
-#endif
+    ClapTrap a;
+    ClapTrap b;
+    a.attack("b");
+    b.takeDamage(5);
+    b.beRepaired(6);
+}

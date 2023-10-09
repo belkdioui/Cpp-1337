@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 15:50:58 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/07 12:22:46 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/04 15:50:06 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/09 17:42:54 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_H
-#define FIXED_H
+#include "Point.hpp"
 
-#include<iostream>
+int main( void ) {
+const Point a(2, 2);
+const Point b(6.8, 0);
+const Point c(7.3 , 3.5);
+const Point point(4.1 , 3.8);
 
-class Fixed
-{
-    int RawBits;
-    static const int fractionalBIts = 8;
-    
-    public: 
-        Fixed();
-        Fixed(const Fixed& other);
-        Fixed& operator=(const Fixed& other);
-        ~Fixed();
-        int getRawBits(void) const;
-        void setRawBits( int const raw);
-};
+// std::cout<<bsp(a, b, c, point)<<std::endl;
 
-#endif
+return 0;
+}
