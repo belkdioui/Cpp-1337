@@ -24,7 +24,7 @@ class Point
         Point();
         Point(const float x1, const float y1);
         Point(const Point& obj);
-        // Point& operator=(const Point& obj);
+        Point& operator=(const Point& obj);
         const Fixed get_value_x() const;
         const Fixed get_value_y() const;
         ~Point();

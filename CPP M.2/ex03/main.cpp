@@ -13,12 +13,12 @@
 #include "Point.hpp"
 
 int main( void ) {
-const Point a(2, 2);
-const Point b(6.8, 0);
-const Point c(7.3 , 3.5);
-const Point point(4.1 , 3.8);
+const Point a(0.f, 0.f);
+const Point b(4.f, 0.f);
+const Point c(2.f , 3.f);
+const Point point(2.f , 1.f);
 
-// std::cout<<bsp(a, b, c, point)<<std::endl;
+std::cout<<bsp(a, b, c, point)<<std::endl;
 
 return 0;
 }
