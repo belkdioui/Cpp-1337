@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:00:00 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/09 14:47:32 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:53:08 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 #define CLAPTRAP_H
 
 #include<iostream>
+#include <string>
 
 class ClapTrap
 {
-private:
+protected:
     std::string Name;
     int HitPoints;
     int EnergyPoints;
     int AttackDamage;
-    
+
     public:
         ClapTrap();
+        ClapTrap(std::string name, int hp, int ep, int ad);
         ClapTrap(std::string str);
         ClapTrap(const ClapTrap& obj);
         ClapTrap& operator=(const ClapTrap& obj);
