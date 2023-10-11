@@ -12,7 +12,7 @@
 
 CC = c++
 
-SRC = main.cpp ClapTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScravTrap.cpp
 
 NAME = and..open
 

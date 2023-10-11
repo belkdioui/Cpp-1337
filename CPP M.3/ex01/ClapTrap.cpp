@@ -12,7 +12,7 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : HitPoints(10) , EnergyPoints(10) ,AttackDamage(0), Name("unknown")
+ClapTrap::ClapTrap() : Name("gg"), HitPoints(10) , EnergyPoints(10) ,AttackDamage(0)
 {
     std::cout<<"obj constructed"<<std::endl;
 }
@@ -45,7 +45,7 @@ void ClapTrap::attack(const std::string& target)
     EnergyPoints--;
     std::cout<<"ClapTrap "<< Name << " attacks " << target << " causing " <<HitPoints<<" points of damage! "<<std::endl;
 }
-void ClapTrap::takeDamage(unsigned int amount)
+void ClapTrap::takeDamage(int amount)
 {
     if(HitPoints - amount < 0)
     {
@@ -57,7 +57,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     HitPoints-=amount;
 }
 
-void ClapTrap::beRepaired(unsigned int amount)
+void ClapTrap::beRepaired(int amount)
 {
     if(HitPoints && EnergyPoints)
         HitPoints+=amount;
