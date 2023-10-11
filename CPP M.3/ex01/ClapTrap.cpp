@@ -17,6 +17,8 @@ ClapTrap::ClapTrap() : Name("gg"), HitPoints(10) , EnergyPoints(10) ,AttackDamag
     std::cout<<"obj constructed"<<std::endl;
 }
 
+ClapTrap::ClapTrap(std::string name, int hp, int ep, int ad) : Name(name), HitPoints(hp), EnergyPoints(ep), AttackDamage(ad){}
+
 ClapTrap::ClapTrap(std::string str) : Name(str) , HitPoints(10) , EnergyPoints(10) , AttackDamage(0)
 {
     std::cout<<"claptrap : "<<Name<< "constructor called" <<std::endl;
