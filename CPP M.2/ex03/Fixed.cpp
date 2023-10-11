@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:00:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/08 16:17:01 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:53:41 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ Fixed Fixed::operator/(const Fixed& other)
     this->RawBits = number;
     return *this;
 }
-Fixed Fixed::operator-(const Fixed& other)
+Fixed Fixed::operator-(const Fixed& other) const
 {
     return Fixed(this->RawBits - other.RawBits);
 }

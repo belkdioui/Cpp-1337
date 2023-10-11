@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:50:06 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/09 17:42:54 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:59:18 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 int main( void ) {
 const Point a(0.f, 0.f);
-const Point b(4.f, 0.f);
-const Point c(2.f , 3.f);
-const Point point(2.f , 1.f);
+const Point b(0.f, 4.f);
+const Point c(4.f , 0.f);
+const Point point(5.f , 5.f);
 
-std::cout<<bsp(a, b, c, point)<<std::endl;
+ if (bsp(a, b, c, point)) {
+        std::cout << "The point is approximately inside the triangle." << std::endl;
+    } else {
+        std::cout << "The point is outside the triangle." << std::endl;
+    }
 
 return 0;
 }

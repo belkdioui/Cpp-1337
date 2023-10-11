@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:00:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/08 09:45:27 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:10:32 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Fixed::Fixed(const float floating)
 float Fixed::toFloat(void) const
 {
     float test;
-    test = (float)RawBits * (pow(2,-8));
+    test = (float)RawBits * (pow(2,-fractionalBIts));
     return test;
 }
 

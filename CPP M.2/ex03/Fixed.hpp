@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:50:58 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/08 16:16:00 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:53:47 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class Fixed
         Fixed operator+(const Fixed& other);
         Fixed operator*(const Fixed& other);
         Fixed operator/(const Fixed& other);
-        Fixed operator-(const Fixed& other);
+        Fixed operator-(const Fixed& other) const;
         Fixed& operator++();
         Fixed operator++(int);
         Fixed& operator--();
