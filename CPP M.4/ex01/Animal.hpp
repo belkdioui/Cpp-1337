@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:42:09 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 11:59:29 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:51:43 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class Animal
         Animal(std::string Type);
         Animal(const Animal& obj);
         Animal& operator=(const Animal& obj);
-        ~Animal();
+        virtual ~Animal();
         std::string getType(void) const;
-        void makeSound() const;
+        virtual void makeSound() const;
 };
 #endif

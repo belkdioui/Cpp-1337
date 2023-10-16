@@ -6,15 +6,17 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:49:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 12:04:39 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:56:34 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 Dog::Dog() : Animal("DOG")
 {
+    BrainDog = new Brain();
     std::cout<<"default constructor called"<<std::endl;
 }
 Dog::Dog(const Dog& obj)
@@ -30,9 +32,10 @@ Dog& Dog::operator=(const Dog& obj)
 }
 Dog::~Dog()
 {
+    delete BrainDog;
     std::cout<<"destructor of Dog called"<<std::endl;
 }
-// void Dog::makeSound()
-// {
-//     std::cout<<"sound of me is wow"<<std::endl;
-// }
+void Dog::makeSound() const
+{
+    std::cout<<"sound of me is wow in CLASS DOG"<<std::endl;
+}

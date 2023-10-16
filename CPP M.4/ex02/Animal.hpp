@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 10:32:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 11:41:22 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/14 10:42:09 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/16 19:16:32 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongAnimal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
+#ifndef ANIMAL_H
+#define ANIMAL_H
 
-int main()
+#include <iostream>
+
+class Animal
 {
-const Animal* meta = new Animal();
-const Animal* j = new Dog();
-const Animal* i = new Cat();
-std::cout << j->getType() << " " << std::endl;
-std::cout << i->getType() << " " << std::endl;
-i->makeSound(); //will output the cat sound!
-j->makeSound();
-meta->makeSound();
-return 0;
-}
+    protected:
+        std::string type;
+    public:
+        Animal();
+        Animal(std::string Type);
+        Animal(const Animal& obj);
+        Animal& operator=(const Animal& obj);
+        ~Animal();
+        std::string getType(void) const;
+        virtual void makeSound() const = 0;
+};
+#endif

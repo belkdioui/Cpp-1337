@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:51:07 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 11:41:46 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:35:12 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,4 @@ std::string Animal::getType(void) const
 Animal::~Animal()
 {
     std::cout<<"Destructor called in animal"<<std::endl;
-}
-
-void Animal::makeSound() const
-{
-    if(type == "CAT")
-        std::cout<<"sound of CAT is meow in Class animal"<<std::endl;
-    if(type == "DOG")
-        std::cout<<"sound of DOG is wow in Class animal"<<std::endl;
 }

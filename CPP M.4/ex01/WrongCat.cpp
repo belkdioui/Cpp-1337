@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:56:07 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 12:59:00 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:37:58 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ WrongCat::~WrongCat()
 {
     std::cout<<"destructor of WrongCat called"<<std::endl;
 }
-// void Cat::makeSound()
-// {
-//     std::cout<<"sound of me is meow"<<std::endl;
-// }
+void WrongCat::makeSound()
+{
+    std::cout<<"sound of me is meow in wrong cat"<<std::endl;
+}

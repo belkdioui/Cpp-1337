@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:49:11 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 12:04:05 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 12:30:02 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 #define DOG_H
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 #include <iostream>
 
 
 class Dog : public Animal
 {
+    Brain *BrainDog;
     public:
         Dog();
         Dog(const Dog& obj);
         Dog& operator=(const Dog& obj);
         ~Dog();
-        // virtual void makeSound();
+        void makeSound() const;
 };
 
 #endif

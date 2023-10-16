@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:46:05 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 12:04:09 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:47:35 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Cat : public Animal
         Cat(const Cat& obj);
         Cat& operator=(const Cat& obj);
         ~Cat();
-        // void makeSound() ;
+        void makeSound() const;
 };
 
 #endif

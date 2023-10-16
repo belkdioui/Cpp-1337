@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 10:46:05 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 12:29:37 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/16 12:09:23 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/16 16:11:26 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_H
-#define CAT_H
-
-#include "Animal.hpp"
 #include "Brain.hpp"
-#include <iostream>
 
-
-class Cat : public Animal
+Brain::Brain()
 {
-    Brain *BrainCat;
-    public:
-        Cat();
-        Cat(const Cat& obj);
-        Cat& operator=(const Cat& obj);
-        ~Cat();
-        void makeSound() const;
-};
+    std::cout<<"Brain contructor called"<<std::endl;
+}
 
-#endif
+Brain::Brain(const Brain& obj)
+{
+    *this = obj;
+    std::cout<<"copy constructor called in brain"<<std::endl;
+}
+Brain& Brain::operator =(const Brain& obj)
+{
+    std::cout<<"copy assignement operator called in brain"<<std::endl;
+    return *this;
+}
+
+Brain::~Brain()
+{
+    std::cout<<"deconstructor called in brain"<<std::endl;
+}

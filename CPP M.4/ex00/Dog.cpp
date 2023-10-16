@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:49:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 12:04:39 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:47:45 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Dog::~Dog()
 {
     std::cout<<"destructor of Dog called"<<std::endl;
 }
-// void Dog::makeSound()
-// {
-//     std::cout<<"sound of me is wow"<<std::endl;
-// }
+void Dog::makeSound() const
+{
+    std::cout<<"sound of me is wow in CLASS DOG"<<std::endl;
+}

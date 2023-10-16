@@ -6,15 +6,17 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:37:42 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 12:04:13 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:06:17 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 Cat::Cat() : Animal("CAT")
 {
+    BrainCat = new Brain();
     std::cout<<"default constructor called"<<std::endl;
 }
 Cat::Cat(const Cat& obj)
@@ -30,9 +32,10 @@ Cat& Cat::operator=(const Cat& obj)
 }
 Cat::~Cat()
 {
+    delete BrainCat;
     std::cout<<"destructor of cat called"<<std::endl;
 }
-// void Cat::makeSound()
-// {
-//     std::cout<<"sound of me is meow"<<std::endl;
-// }
+void Cat::makeSound() const
+{
+    std::cout<<"sound of me is meow in class cat"<<std::endl;
+}

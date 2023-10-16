@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 10:32:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 11:41:22 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/16 12:01:28 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/16 16:09:47 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongAnimal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
+#ifndef BRAIN_H
+#define BRAIN_H
 
-int main()
+#include <iostream>
+
+class Brain
 {
-const Animal* meta = new Animal();
-const Animal* j = new Dog();
-const Animal* i = new Cat();
-std::cout << j->getType() << " " << std::endl;
-std::cout << i->getType() << " " << std::endl;
-i->makeSound(); //will output the cat sound!
-j->makeSound();
-meta->makeSound();
-return 0;
-}
+    public:
+    std::string ideas[100];
+    Brain();
+    Brain(const Brain& obj);
+    Brain& operator=(const Brain& obj);
+    ~Brain();
+};
+
+
+
+#endif

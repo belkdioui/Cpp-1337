@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 12:56:07 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 11:37:58 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/14 11:37:42 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/16 18:52:30 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
-#include "WrongAnimal.hpp"
+#include "Cat.hpp"
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-WrongCat::WrongCat() : WrongAnimal("WrongCat")
+Cat::Cat() : Animal("CAT")
 {
+    BrainCat = new Brain();
     std::cout<<"default constructor called"<<std::endl;
 }
-WrongCat::WrongCat(const WrongCat& obj)
+Cat::Cat(const Cat& obj)
 {
     *this = obj;
-    std::cout<<"copy constructor called of WrongCat"<<std::endl;
+    std::cout<<"copy constructor called of cat"<<std::endl;
 }
-WrongCat& WrongCat::operator=(const WrongCat& obj)
+Cat& Cat::operator=(const Cat& obj)
 {
     (void)obj;
-    std::cout<<"assignement operator of WrongCat"<<std::endl;
+    std::cout<<"assignement operator of cat"<<std::endl;
     return *this;
 }
-WrongCat::~WrongCat()
+Cat::~Cat()
 {
-    std::cout<<"destructor of WrongCat called"<<std::endl;
+    delete BrainCat;
+    std::cout<<"destructor of cat called"<<std::endl;
 }
-void WrongCat::makeSound()
+void Cat::makeSound() const
 {
-    std::cout<<"sound of me is meow in wrong cat"<<std::endl;
+    std::cout<<"sound of me is meow in class cat"<<std::endl;
 }

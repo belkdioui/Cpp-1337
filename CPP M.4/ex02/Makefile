@@ -6,14 +6,14 @@
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 10:32:27 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/10/16 12:54:24 by bel-kdio         ###   ########.fr        #
+#    Updated: 2023/10/16 19:16:40 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp Brain.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = ex01
+NAME = ex02
 RM =rm -rf
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 

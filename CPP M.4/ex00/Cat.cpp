@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:37:42 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 12:04:13 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:47:55 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Cat::~Cat()
 {
     std::cout<<"destructor of cat called"<<std::endl;
 }
-// void Cat::makeSound()
-// {
-//     std::cout<<"sound of me is meow"<<std::endl;
-// }
+void Cat::makeSound() const
+{
+    std::cout<<"sound of me is meow in class cat"<<std::endl;
+}
