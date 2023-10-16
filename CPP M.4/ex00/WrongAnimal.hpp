@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 12:59:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 15:39:31 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/14 12:47:40 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/14 12:48:42 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#ifndef WRONGANIMAL_H
+#define WRONGANIMAL_H
 
-int main()
+#include <iostream>
+
+class WrongAnimal
 {
-    // ScavTrap a;
-    // a.beRepaired(5);
-    ClapTrap *ptr;
-    ptr =  new ScavTrap();
-    ptr->attack("target");
-    delete ptr;
-    // ptr->attack("target");
-}
+    protected:
+        std::string type;
+    public:
+        WrongAnimal();
+        WrongAnimal(std::string Type);
+        WrongAnimal(const WrongAnimal& obj);
+        WrongAnimal& operator=(const WrongAnimal& obj);
+        ~WrongAnimal();
+        std::string getType(void) const;
+        void makeSound() const;
+};
+#endif

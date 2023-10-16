@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 12:59:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 15:39:31 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/14 12:54:44 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/14 12:56:00 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#ifndef WRONGCAT_H
+#define WRONGCAT_H
 
-int main()
+#include "WrongAnimal.hpp"
+#include <iostream>
+
+
+class WrongCat : public WrongAnimal
 {
-    // ScavTrap a;
-    // a.beRepaired(5);
-    ClapTrap *ptr;
-    ptr =  new ScavTrap();
-    ptr->attack("target");
-    delete ptr;
-    // ptr->attack("target");
-}
+    public:
+        WrongCat();
+        WrongCat(const WrongCat& obj);
+        WrongCat& operator=(const WrongCat& obj);
+        ~WrongCat();
+        // void makeSound() ;
+};
+
+#endif

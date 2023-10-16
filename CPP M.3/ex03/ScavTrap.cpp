@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:53:36 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/12 18:43:08 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/14 10:20:49 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ ScavTrap::ScavTrap(): ClapTrap("unknown", 100, 50, 20)
     std::cout<<"scavtrap constructed"<<std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
     std::cout<<"scavtrap : "<<name<< "constructor called" <<std::endl;
 }
@@ -40,7 +40,7 @@ void ScavTrap::attack(const std::string& target)
 {
     if (HitPoints <= 0 || EnergyPoints <= 0)
     {
-        std::cout<<"i'm sorry i think he don't has hitpoint or energy to attack"<<std::endl;
+        std::cout<<"i'm sorry i think" << Name << "he don't has hitpoint or energy to attack"<<std::endl;
         return ;
     }
     EnergyPoints--;

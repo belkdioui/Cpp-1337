@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 12:59:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 15:39:31 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/14 10:42:09 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/14 11:59:29 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#ifndef ANIMAL_H
+#define ANIMAL_H
 
-int main()
+#include <iostream>
+
+class Animal
 {
-    // ScavTrap a;
-    // a.beRepaired(5);
-    ClapTrap *ptr;
-    ptr =  new ScavTrap();
-    ptr->attack("target");
-    delete ptr;
-    // ptr->attack("target");
-}
+    protected:
+        std::string type;
+    public:
+        Animal();
+        Animal(std::string Type);
+        Animal(const Animal& obj);
+        Animal& operator=(const Animal& obj);
+        ~Animal();
+        std::string getType(void) const;
+        void makeSound() const;
+};
+#endif

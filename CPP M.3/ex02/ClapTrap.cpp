@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:59:57 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 10:04:54 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/14 10:05:08 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ ClapTrap::ClapTrap(std::string str) : Name(str) , HitPoints(10) , EnergyPoints(1
 
 ClapTrap::ClapTrap(const ClapTrap& obj): Name(obj.Name), HitPoints(obj.HitPoints), EnergyPoints(obj.EnergyPoints), AttackDamage(obj.AttackDamage)
 {
-    std::cout<<"copy consctor called in claptrap "<<std::endl;
+    std::cout<<"copy consctor called"<<std::endl;
 }
 ClapTrap& ClapTrap::operator=(const ClapTrap& obj)
 {

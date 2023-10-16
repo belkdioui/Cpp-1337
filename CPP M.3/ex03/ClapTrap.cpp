@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:59:57 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 10:04:54 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/14 10:05:18 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap() : Name("unknown"), HitPoints(10) , EnergyPoints(10) ,AttackDamage(0)
 {
-    std::cout<<"claptrap constructed"<<std::endl;
+    std::cout<<"ClapTrap constructed"<<std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name, int hp, int ep, int ad) : Name(name), HitPoints(hp), EnergyPoints(ep), AttackDamage(ad)
@@ -24,12 +24,12 @@ ClapTrap::ClapTrap(std::string name, int hp, int ep, int ad) : Name(name), HitPo
 
 ClapTrap::ClapTrap(std::string str) : Name(str) , HitPoints(10) , EnergyPoints(10) , AttackDamage(0)
 {
-    std::cout<<"claptrap : "<<Name<< "constructor called" <<std::endl;
+    std::cout<<"claptrap : "<<Name<< " constructor called" <<std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& obj): Name(obj.Name), HitPoints(obj.HitPoints), EnergyPoints(obj.EnergyPoints), AttackDamage(obj.AttackDamage)
 {
-    std::cout<<"copy consctor called in claptrap "<<std::endl;
+    std::cout<<"copy consctor called"<<std::endl;
 }
 ClapTrap& ClapTrap::operator=(const ClapTrap& obj)
 {

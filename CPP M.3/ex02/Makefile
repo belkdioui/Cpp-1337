@@ -6,13 +6,13 @@
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 12:58:52 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/10/12 18:14:10 by bel-kdio         ###   ########.fr        #
+#    Updated: 2023/10/12 18:14:33 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp 
 
 NAME = and..open
 

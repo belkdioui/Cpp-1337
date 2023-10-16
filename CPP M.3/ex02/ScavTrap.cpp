@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:53:36 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/12 18:43:08 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/13 09:32:23 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ ScavTrap::ScavTrap(): ClapTrap("unknown", 100, 50, 20)
     std::cout<<"scavtrap constructed"<<std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
     std::cout<<"scavtrap : "<<name<< "constructor called" <<std::endl;
 }

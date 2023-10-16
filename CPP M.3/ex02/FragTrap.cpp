@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 14:53:36 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/12 18:43:08 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/12 14:53:45 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/12 15:57:26 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include "ClapTrap.hpp"
 
-ScavTrap::ScavTrap(): ClapTrap("unknown", 100, 50, 20)
+FragTrap::FragTrap(): ClapTrap("unknown", 100, 100, 30)
 {
-    std::cout<<"scavtrap constructed"<<std::endl;
+    std::cout<<"FragTrap constructed"<<std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
-    std::cout<<"scavtrap : "<<name<< "constructor called" <<std::endl;
+    std::cout<<"FragTrap : "<<name<< "constructor called" <<std::endl;
 }
-ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj)
+FragTrap::FragTrap(const FragTrap& obj) : ClapTrap(obj)
 {
-    std::cout<<"copy consctor called in Scavtrap "<<std::endl;
+    std::cout<<"copy consctor called in FragTrap "<<std::endl;
 }
 
-ScavTrap& ScavTrap::operator=(const ScavTrap& obj)
+FragTrap& FragTrap::operator=(const FragTrap& obj)
 {
     this->Name = obj.Name;
     this->HitPoints =obj.HitPoints;
@@ -36,7 +36,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& obj)
     return *this;
 }
 
-void ScavTrap::attack(const std::string& target)
+void FragTrap::attack(const std::string& target)
 {
     if (HitPoints <= 0 || EnergyPoints <= 0)
     {
@@ -44,14 +44,15 @@ void ScavTrap::attack(const std::string& target)
         return ;
     }
     EnergyPoints--;
-    std::cout<<"ScavTrap "<< Name << " attacks " << target << " causing " <<HitPoints<<" points of damage! "<<std::endl;
-}
-void ScavTrap::guardGate()
-{
-	std::cout << "ScavTrap " << this->Name << "Gate mode!" << std::endl;
+    std::cout<<"FragTrap "<< Name << " attacks " << target << " causing " <<HitPoints<<" points of damage! "<<std::endl;
 }
 
-ScavTrap::~ScavTrap()
+void FragTrap::highFivesGuys(void)
 {
-    std::cout<<"scavtrap destructed"<<std::endl;
+    std::cout << "FragTrap "  <<this->Name<< "highFives GUyes!" << std::endl;
+}
+
+FragTrap::~FragTrap()
+{
+    std::cout<<"FragTrap destructed"<<std::endl;
 }

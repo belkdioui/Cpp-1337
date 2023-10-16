@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 12:59:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 15:39:31 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/14 10:49:11 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/10/14 12:04:05 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#ifndef DOG_H
+#define DOG_H
 
-int main()
+#include "Animal.hpp"
+#include <iostream>
+
+
+class Dog : public Animal
 {
-    // ScavTrap a;
-    // a.beRepaired(5);
-    ClapTrap *ptr;
-    ptr =  new ScavTrap();
-    ptr->attack("target");
-    delete ptr;
-    // ptr->attack("target");
-}
+    public:
+        Dog();
+        Dog(const Dog& obj);
+        Dog& operator=(const Dog& obj);
+        ~Dog();
+        // virtual void makeSound();
+};
+
+#endif

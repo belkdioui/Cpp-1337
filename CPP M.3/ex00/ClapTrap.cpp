@@ -6,15 +6,15 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:59:57 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/09 17:26:35 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/14 09:57:25 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : HitPoints(10) , EnergyPoints(10) ,AttackDamage(0), Name("unknown")
+ClapTrap::ClapTrap() : Name("unknown"), HitPoints(10) , EnergyPoints(10) ,AttackDamage(0)
 {
-    std::cout<<"obj constructed"<<std::endl;
+    std::cout<<"claptrap constructed"<<std::endl;
 }
 
 ClapTrap::ClapTrap(std::string str) : Name(str) , HitPoints(10) , EnergyPoints(10) , AttackDamage(0)
@@ -53,7 +53,7 @@ void ClapTrap::takeDamage(unsigned int amount)
         std::cout<<"is dead"<<std::endl;
         return;
     }
-    std::cout<<"takes"<<amount<<"damage"<<std::endl;
+    std::cout<<"takes "<<amount<<" damage"<<std::endl;
     HitPoints-=amount;
 }
 
@@ -61,11 +61,11 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
     if(HitPoints && EnergyPoints)
         HitPoints+=amount;
-    std::cout<<"claptrap"<<this->Name<<"is healed" <<amount<<std::endl;
+    std::cout<<"claptrap "<<this->Name<<" is healed " <<amount<<std::endl;
     EnergyPoints--;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout<<"obj destructed"<<std::endl;
+    std::cout<<"claptrap destructed"<<std::endl;
 }

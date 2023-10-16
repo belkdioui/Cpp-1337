@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:00:00 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/14 13:31:01 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/14 13:31:41 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include<iostream>
 #include <string>
 
-class ClapTrap
+class ClapTrap 
 {
 protected:
     std::string Name;

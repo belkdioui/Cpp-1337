@@ -5,24 +5,19 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/09 12:58:52 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/10/12 18:14:10 by bel-kdio         ###   ########.fr        #
+#    Created: 2023/10/14 10:32:27 by bel-kdio          #+#    #+#              #
+#    Updated: 2023/10/14 12:14:05 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp
-
-NAME = and..open
-
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp
 OBJ = $(SRC:.cpp=.o)
+NAME = ex00
+RM =rm -rf
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-RM = rm -rf
-
-CFLAGS = -Wall -Werror -Wextra -std=c++98 
-
-all : $(NAME)
+all: $(NAME)
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
