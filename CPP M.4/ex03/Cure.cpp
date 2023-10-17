@@ -17,21 +17,23 @@ Cure::Cure() : AMateria("cure")
     std::cout<<"default constructor of Cure"<<std::endl;
 };
 
-Cure::Cure(const Cure& obj)
+Cure::Cure(const Cure& obj) : AMateria(obj)
 {
     std::cout<<"copy constructor in Cure"<<std::endl;
-    *this = obj;
 }
 Cure& Cure::operator=(const Cure& obj)
 {
-    (void) obj;
+    this->AMateria::operator=(obj);
     return *this;
 }
 Cure* Cure::clone()
 {
-    Cure * obj;
-    obj = this;
-    return obj;
+    return new Cure(*this)
+}
+
+void Cure::use(ICharacter& target)
+{
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 
 Cure::~Cure()

@@ -17,6 +17,18 @@ AMateria::AMateria() : Type("")
     std::cout<< "default contrctor called in AMateria"<<std::endl;
 }
 
+AMateria::AMateria(const AMateria& obj) : Type(obj.Type)
+{
+    std::cout<<"copy constructor in AMateria"<<std::endl;
+}
+
+AMateria& AMateria::operator=(const &AMateria& obj)
+{
+    std::cout<<"assignement operator in AMateria"<<std::endl;
+    this->Type = obj.Type;
+    return *this;
+}
+
 AMateria::AMateria(std::string const & type) : Type(type)
 {
     std::cout<<"parametrize constructor of AMateria"<<std::endl;
@@ -24,7 +36,7 @@ AMateria::AMateria(std::string const & type) : Type(type)
 
 std::string const & AMateria::getType() const
 {
-    return Type;
+    return this->Type;
 }
 
 AMateria::~AMateria()

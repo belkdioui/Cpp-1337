@@ -17,24 +17,26 @@ Ice::Ice() : AMateria("Ice")
     std::cout<<"default constructor of Ice"<<std::endl;
 };
 
-Ice::Ice(const Ice& obj)
+Ice::Ice(const Ice& obj) : AMateria(obj)
 {
     std::cout<<"copy constructor in Ice"<<std::endl;
-    *this = obj;
 }
 Ice& Ice::operator=(const Ice& obj)
 {
-    (void) obj;
+    this->AMateria::operator=(obj);
     return *this;
 }
 Ice* Ice::clone()
 {
-    Ice * obj;
-    obj = this;
-    return obj;
+    return new Ice(*this)
+}
+
+void Ice::use(ICharacter& target)
+{
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
 
 Ice::~Ice()
 {
     std::cout<<"default constructor of Ice"<<std::endl;
-};
+}
