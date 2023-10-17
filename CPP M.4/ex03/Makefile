@@ -6,12 +6,12 @@
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 07:44:26 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/10/17 07:44:39 by bel-kdio         ###   ########.fr        #
+#    Updated: 2023/10/17 17:02:02 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-SRC = main.cpp 
+SRC = main.cpp Cure.cpp Ice.cpp AMateria.cpp 
 OBJ = $(SRC:.cpp=.o)
 NAME = ex03
 RM =rm -rf

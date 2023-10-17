@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:58:32 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/17 08:26:19 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:35:46 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Cure: public AMateria
     Cure(const Cure& obj);
     Cure& operator=(const Cure& obj);
     ~Cure();
-    AMateria* clone();
+    AMateria* clone() const;
     void use(ICharacter& target);
 };
 

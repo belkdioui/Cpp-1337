@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:09:23 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 15:10:32 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:39:54 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@ Brain::Brain()
     std::cout<<"Brain contructor called"<<std::endl;
 }
 
-// Brain::Brain(const Brain& obj)
-// {
-//     *this = obj;
-//     std::cout<<"copy constructor called in brain"<<std::endl;
-// }
+Brain::Brain(const Brain& obj)
+{
+    *this = obj;
+    std::cout<<"copy constructor called in brain"<<std::endl;
+}
+
+Brain& Brain::operator=(const Brain& obj)
+{
+    (void)obj;
+    std::cout<<"copy assignement operator called in brain"<<std::endl;
+    return *this;
+}
 
 Brain::~Brain()
 {

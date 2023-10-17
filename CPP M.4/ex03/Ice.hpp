@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 08:29:02 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/17 08:29:39 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:35:51 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Ice: public AMateria
     Ice(const Ice& obj);
     Ice& operator=(const Ice& obj);
     ~Ice();
-    AMateria* clone();
+    AMateria* clone() const;
     void use(ICharacter& target);
 };
 

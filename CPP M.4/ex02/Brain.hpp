@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:01:28 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 15:10:23 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:37:19 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ class Brain
     public:
     std::string ideas[100];
     Brain();
-    // Brain(const Brain& obj);
-    // Brain& operator=(const Brain& obj);
+    Brain(const Brain& obj);
+    Brain& operator=(const Brain& obj);
     ~Brain();
 };
 

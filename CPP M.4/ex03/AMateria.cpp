@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 08:18:29 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/17 08:24:06 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:35:33 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ AMateria::AMateria(const AMateria& obj) : Type(obj.Type)
     std::cout<<"copy constructor in AMateria"<<std::endl;
 }
 
-AMateria& AMateria::operator=(const &AMateria& obj)
+AMateria& AMateria::operator=(const AMateria& obj)
 {
     std::cout<<"assignement operator in AMateria"<<std::endl;
     this->Type = obj.Type;
@@ -38,7 +38,10 @@ std::string const & AMateria::getType() const
 {
     return this->Type;
 }
-
+void AMateria::use(ICharacter& target)
+{
+    (void)target;
+}
 AMateria::~AMateria()
 {
     std::cout<< "destructor contrctor called in AMateria"<<std::endl;

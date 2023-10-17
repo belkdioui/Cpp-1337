@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:46:07 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/17 08:48:34 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:35:35 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define AMATERIA_H
 
 #include <iostream>
+#include "ICharacter.hpp"
 
 class AMateria
 {
