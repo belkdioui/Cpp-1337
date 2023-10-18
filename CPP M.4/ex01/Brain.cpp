@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:09:23 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 16:11:26 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:25:55 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ Brain::Brain(const Brain& obj)
 }
 Brain& Brain::operator =(const Brain& obj)
 {
+    for(int i = 0; i < 100; i++)
+    {
+        this->ideas[i] = obj.ideas[i];
+    }
     std::cout<<"copy assignement operator called in brain"<<std::endl;
     return *this;
 }

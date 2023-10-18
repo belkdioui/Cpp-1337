@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:49:11 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/16 12:30:02 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:56:17 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 #include <iostream>
-
 
 class Dog : public Animal
 {

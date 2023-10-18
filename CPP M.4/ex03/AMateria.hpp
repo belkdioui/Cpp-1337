@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:46:07 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/17 19:35:35 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:29:39 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
     std::string const & getType() const;
     virtual AMateria* clone() const = 0;
     virtual void use(ICharacter& target);
-    ~AMateria();
+    virtual ~AMateria();
 };
 
 #endif
