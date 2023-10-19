@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:58:09 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/17 19:35:37 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:33:18 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 Cure::Cure() : AMateria("cure")
 {
-    std::cout<<"default constructor of Cure"<<std::endl;
+    // std::cout<<"default constructor of Cure"<<std::endl;
 }
 
 Cure::Cure(const Cure& obj) : AMateria(obj)
 {
-    std::cout<<"copy constructor in Cure"<<std::endl;
+    // std::cout<<"copy constructor in Cure"<<std::endl;
 }
 Cure& Cure::operator=(const Cure& obj)
 {
@@ -39,5 +39,5 @@ void Cure::use(ICharacter& target)
 
 Cure::~Cure()
 {
-    std::cout<<"default constructor of Cure"<<std::endl;
+    // std::cout<<"default constructor of Cure"<<std::endl;
 }

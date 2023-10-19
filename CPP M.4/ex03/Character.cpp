@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:00:43 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/18 20:58:51 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:35:13 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ Character::Character() : Name("")
         slot[i] = NULL;
         stored[i] = NULL;
     }   
-    std::cout<<"default constructor in character"<<std::endl;
+    // std::cout<<"default constructor in character"<<std::endl;
 }
 Character::~Character()
 {
     for (int i = 0; i < 4; i++) {
         delete stored[i];
+    }
+    for (int i = 0; i < 4; i++) {
+        if(slot[i])
+            delete slot[i];
     }
 }
 Character::Character(std::string name) : Name(name)
@@ -38,12 +42,12 @@ Character::Character(std::string name) : Name(name)
         stored[i] = NULL;
         slot[i] = NULL;
     } 
-    std::cout<<"constructor parametrize in character"<<std::endl;
+    // std::cout<<"constructor parametrize in character"<<std::endl;
 }
 Character::Character(const Character& obj)
 {
     *this = obj;
-    std::cout<<"copy constructor in character"<<std::endl;
+    // std::cout<<"copy constructor in character"<<std::endl;
 }
 
 Character& Character::operator=(const Character& obj)
@@ -51,6 +55,7 @@ Character& Character::operator=(const Character& obj)
     for(int i = 0; i < 4 ;i++)
     {
         delete slot[i];
+        slot[i] = NULL;
         if(obj.slot[i])
             this->slot[i] = obj.slot[i]->clone();
         else
@@ -69,8 +74,9 @@ std::string const &Character::getName() const
 
 void Character::use(int idx, ICharacter& target)
 {
-    if (idx >= 0 && idx <=3) 
+    if (idx >= 0 && idx <=3 && slot[idx]) 
     {
+        // std::cout<<slot[idx]->getType()<<std::endl;
         slot[idx]->use(target);
     }
 }
@@ -89,7 +95,7 @@ void Character::equip(AMateria* m)
                 return ;
             }
         }
-        delete m;
+       delete m;
     }
 }
 
