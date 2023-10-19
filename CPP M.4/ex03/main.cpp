@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:44:56 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/19 13:57:13 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:55:14 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,31 @@
 #include "MateriaSource.hpp"
 #include <cstdlib>
 
-void man()
-{  
-        IMateriaSource* src = new MateriaSource();
-        src->learnMateria(new Ice());
-        src->learnMateria(new Cure());
-        
-        ICharacter* me = new Character("me");
-        AMateria* tmp;
+void	test1()
+{
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	
+	ICharacter* me = new Character("me");
+	
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
 
-        tmp = src->createMateria("ice");
-        me->equip(tmp);
-
-        tmp = src->createMateria("cure");
-        me->equip(tmp);
-        
-        ICharacter* bob = new Character("bob");
-        
-        me->use(0, *bob);
-        me->use(1, *bob);
-        
-        delete bob;
-        delete me;
-        delete src;
+	delete bob;
+	delete me;
+	delete src;	
 }
 
 int main()
 {
-        man();
+        test1();
         system("leaks ex03");
         return 0;
 }

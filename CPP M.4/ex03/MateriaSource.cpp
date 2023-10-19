@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 11:30:33 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/19 14:37:49 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:59:24 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ MateriaSource::~MateriaSource()
 
 void MateriaSource::learnMateria(AMateria* ama)
 {
+    // for (int i = 0; i < 4; i++) {
+    //     if(!stored[i] && ama != NULL)
+    //       this->stored[i] = ama;  
+    // }
     int i;
     for (i = 0; i < 4 && stored[i]; i++);
     if (i < 4)
-        this->stored[i] = ama;
+        this->stored[i] = ama;   
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type)
