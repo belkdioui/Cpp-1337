@@ -6,14 +6,14 @@
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:37:35 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/10/27 22:40:14 by bel-kdio         ###   ########.fr        #
+#    Updated: 2023/10/28 08:53:43 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = ex02
+NAME = ex03
 RM =rm -rf
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 

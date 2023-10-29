@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:34:41 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/29 10:12:14 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/28 12:38:19 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ class AForm
   public:
     AForm();
     AForm(std::string const Name, int Grade_s, int Grade_e);
-    AForm(int Grade_s, std::string const target, int Grade_e);
-    AForm(std::string name, std::string target);
     AForm(const AForm& obj);
     AForm& operator=(const AForm& obj);
     ~AForm();
     std::string const getName() const;
-    std::string const getTarget() const;
     int getGrade_s() const;
     int getGrade_e() const;
     bool getSigne() const;
@@ -49,7 +46,6 @@ class AForm
         };
   private:
     std::string const name;
-    std::string const target;
     bool signe;
     int const grade_s;
     int const grade_e;

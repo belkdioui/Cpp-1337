@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:43:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/29 10:21:07 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:33:20 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void Bureaucrat::executeForm(AForm const & form)
 {
     try {
     form.execute(*this);
-        std::cout << this->getName() <<" executed "<<form.getTarget();
+        std::cout << this->getName() <<" executed "<<form.getName();
     } catch (std::exception &e) {
-        std::cout << this->getName() <<" can't execute "<<form.getTarget();
+        std::cout << this->getName() <<" can't execute "<<form.getName();
     }
 }

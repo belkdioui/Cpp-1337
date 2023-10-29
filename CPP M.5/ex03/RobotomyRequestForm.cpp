@@ -6,15 +6,15 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:50:13 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/29 10:16:30 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:47:37 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm():AForm( 72,"", 45){} 
-RobotomyRequestForm::RobotomyRequestForm(std::string target):AForm( 72,target, 45){}
+RobotomyRequestForm::RobotomyRequestForm():AForm("", 72, 45){} 
+RobotomyRequestForm::RobotomyRequestForm(std::string target):AForm(target, 72, 45){}
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& obj):AForm(obj){};
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& obj)
 {
@@ -27,10 +27,10 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const
         {
             std::cout<<".....driiiiillll......."<<std::endl;
             if (rand() % 2 ) {
-                std::cout<<this->getTarget()<<" has been robotomized successfully"<<std::endl;
+                std::cout<<this->getName()<<" has been robotomized successfully"<<std::endl;
             }
             else {
-                std::cout<<this->getTarget()<<" robotomy failed"<<std::endl;
+                std::cout<<this->getName()<<" robotomy failed"<<std::endl;
             }
         }
         else {
