@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 12:22:49 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/01 16:51:46 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/10/30 12:10:49 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/01 14:11:10 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include <exception>
-
-int main()
+#ifndef SCALARCONVERTER_H
+#define  SCALARCONVERTER_H
+#include <iostream>
+class ScalarConverter
 {
-    try
-    {
-     Bureaucrat oss("ossama",1);
-     oss.increGrade();
-     std::cout<<oss<<std::endl;
-    }  
-    catch(std::exception& e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    
-}
+    public:
+    ScalarConverter();
+    ScalarConverter(const ScalarConverter& obj);
+    ScalarConverter& operator=(const ScalarConverter& obj);
+    ~ScalarConverter();
+    static void convert(std::string str);
+};
+#endif

@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:22:49 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/28 23:21:53 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:59:47 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int main()
     Bureaucrat corr("mosa7i7", 1);
     try
     {
-        rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
-        corr.signForm(*rrf);
-        corr.executeForm(*rrf);
+        rrf = someRandomIntern.makeForm("shrubberyreation", "Bender");
+            corr.signForm(*rrf);
+            corr.executeForm(*rrf);
     }  
     catch(std::exception& e)
     {
