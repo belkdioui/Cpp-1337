@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:25:05 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/01 19:48:28 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:11:32 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj)
 {
     (void)obj;
     return (*this);
-}
-
-size_t strchrForString(const std::string& str, char ch) {
-    for (size_t i = 0; i < str.length(); ++i) {
-        if (str[i] == ch) {
-            return i;
-        }
-    }
-    return 0;
 }
 
 ScalarConverter::~ScalarConverter()
@@ -71,9 +62,16 @@ void ret_char(std::string str)
 
 float ret_float(std::string str, int x)
 {
+    size_t len = str.length();
+    if(len == 1 && std::isalpha(str[0]))
+    {
+        int n = static_cast<int>(str[0]);
+        std::cout<<"float: "<<n<<".0f"<<std::endl;
+        return 0;
+    }
     if (str == "-inf" && !x) 
     {
-        std::cout<<"float: "<<"inff"<<std::endl;
+        std::cout<<"float: "<<"-inff"<<std::endl;
         return 0;
     }
     if (str == "+inf" && !x) 
@@ -105,9 +103,16 @@ float ret_float(std::string str, int x)
 }
 void ret_double(std::string str)
 {
+    size_t len = str.length();
+    if(len == 1 && std::isalpha(str[0]))
+    {
+        int n = static_cast<int>(str[0]);
+        std::cout<<"double: "<<n<<".0"<<std::endl;
+        return ;
+    }
     if (str == "-inf") 
     {
-        std::cout<<"double: "<<"inf"<<std::endl;
+        std::cout<<"double: "<<"-inf"<<std::endl;
         return;
     }
     if (str == "+inf") 
@@ -145,6 +150,13 @@ void ret_double(std::string str)
 
 void ret_int(std::string str)
 {
+    size_t len = str.length();
+    if(len == 1 && std::isalpha(str[0]))
+    {
+        int n = static_cast<int>(str[0]);
+        std::cout<<"int: "<<n<<std::endl;
+        return ;
+    }
     for (int i = 0; str[i]; i++) {
         if (isdigit(str[i]) || str[i] == '.' || str[i] == 'f' || str[i] == '+' || str[i] == '-') {
             
