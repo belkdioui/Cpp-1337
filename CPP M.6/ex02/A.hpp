@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serialization.cpp                                  :+:      :+:    :+:   */
+/*   A.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 23:23:11 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/02 22:10:01 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/11/03 08:43:40 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/03 08:46:58 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serialization.hpp"
-#include <sys/_types/_uintptr_t.h>
-uintptr_t Serializer::serialize(Data *ptr)
-{
-    return(reinterpret_cast<uintptr_t>(ptr));
-}
+#ifndef A_H
+#define A_H
 
-Data* Serializer::deserialize(uintptr_t raw)
+#include "Base.hpp"
+
+class A : public Base
 {
-    return(reinterpret_cast<Data*>(raw));
-}
+    public:
+};
+
+#endif

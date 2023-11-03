@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:34:41 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/31 17:46:20 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:24:54 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class AForm
     AForm(std::string name, std::string target);
     AForm(const AForm& obj);
     AForm& operator=(const AForm& obj);
-    ~AForm();
+    virtual ~AForm();
     std::string const getName() const;
     std::string const getTarget() const;
     int getGrade_s() const;
