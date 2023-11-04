@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:43:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/01 16:59:38 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:42:08 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,8 @@ std::ostream& operator<<(std::ostream& output, const Bureaucrat& obj)
 void Bureaucrat::signForm(AForm& obj)
 {
     try {
-        if(&obj != nullptr)
-        {
             obj.beSigned(*this);
-            std::cout<< getName() <<" signed "<<obj.getName();
-        }
+            std::cout<< getName() <<" signed "<<obj.getName() <<std::endl;
     } catch (std::exception &e) {
         std::cout<< getName() <<" couldn’t sign "<<obj.getName()<<" because the grade of beraucrat is lower than the personel "<<std::endl;
     }
@@ -66,12 +63,9 @@ void Bureaucrat::signForm(AForm& obj)
 void Bureaucrat::executeForm(AForm const & form)
 {
     try {
-        if(&form != nullptr)
-        {
             form.execute(*this);
-            std::cout << this->getName() <<" executed "<<form.getName();
-        }
+            std::cout << this->getName() <<" executed "<<form.getName() <<std::endl;
     } catch (std::exception &e) {
-        std::cout << this->getName() <<" can't execute "<<form.getName();
+        std::cout << this->getName() <<" can't execute "<<form.getName() << std::endl;
     }
 }

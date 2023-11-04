@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:22:49 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/02 19:29:39 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:43:18 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int main()
     try
     {
         rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
+        if(rrf)
+        {
         corr.signForm(*rrf);
         corr.executeForm(*rrf);
+        delete rrf;
+        }
     }  
     catch(std::exception& e)
     {

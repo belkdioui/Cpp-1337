@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:43:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/29 10:21:07 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:42:51 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void Bureaucrat::decreGrade()
 }
 std::ostream& operator<<(std::ostream& output, const Bureaucrat& obj)
 {
-    output<<obj.getName()<<", bureaucrat grade "<<obj.getGrade();
+    output<<obj.getName()<<", bureaucrat grade "<<obj.getGrade()<<std::endl;
     return output;
 }
 void Bureaucrat::signForm(AForm& obj)
 {
     try {
     obj.beSigned(*this);
-    std::cout<< getName() <<" signed "<<obj.getName();
+    std::cout<< getName() <<" signed "<<obj.getName()<<std::endl;
     } catch (std::exception &e) {
         std::cout<< getName() <<" couldn’t sign "<<obj.getName()<<" because the grade of beraucrat is lower than the personel "<<std::endl;
     }
@@ -63,8 +63,8 @@ void Bureaucrat::executeForm(AForm const & form)
 {
     try {
     form.execute(*this);
-        std::cout << this->getName() <<" executed "<<form.getTarget();
+        std::cout << this->getName() <<" executed "<<form.getTarget() <<std::endl;
     } catch (std::exception &e) {
-        std::cout << this->getName() <<" can't execute "<<form.getTarget();
+        std::cout << this->getName() <<" can't execute "<<form.getTarget()<<std::endl;
     }
 }

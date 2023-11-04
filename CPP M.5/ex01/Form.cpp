@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 09:52:33 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/10/26 15:58:55 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:01:17 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Form::Form(std::string const Name, int Grade_s, int Grade_e) : name(Name) , sign
     else if (Grade_e > 150)
         throw GradeTooLowException();           
 };
-Form::Form(const Form& obj) : name(obj.name), grade_e(obj.grade_e), grade_s(obj.grade_s), signe(obj.signe){};
+Form::Form(const Form& obj) : name(obj.name),signe(obj.signe) , grade_s(obj.grade_s),grade_e(obj.grade_e) {};
 Form& Form::operator=(const Form& obj){ (void) obj; return *this;};
 Form::~Form(){};
 std::string const Form::getName() const {return name;};

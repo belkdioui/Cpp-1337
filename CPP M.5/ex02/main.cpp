@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:22:49 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/02 19:28:02 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:35:01 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int main()
 {
     try
     {
-    AForm *job1 = new ShrubberyCreationForm("badre");
-    Bureaucrat oss("ossama",1);
+    AForm *job1 = new ShrubberyCreationForm("file1");
+    Bureaucrat oss("badre",1);
     job1->beSigned(oss);
     oss.executeForm(*job1);
-    // job1->execute(oss);
-    // oss.signForm(job1);
+    delete job1;
     }  
     catch(std::exception& e)
     {

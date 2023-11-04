@@ -2,11 +2,13 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <typeinfo>
 
 Base * generate(void)
 {
     std::cout<<"generate"<<std::endl;
     Base *type = NULL;
+    srand(time(0));
     int random_number = rand() % 3;
     switch (random_number)
     {
@@ -27,32 +29,49 @@ Base * generate(void)
 
 void identify(Base* p)
 {
-    A *a = new A();
-    B *b = new B();
-    C *c = new C();
-    int i;
-    Base * types[3]={a, b, c};
-    for(i = 0; i < 3; i++)
-    {
-        types[i]=dynamic_cast<types[i]>(p);
-        if(types == NULL)
-            i++;
-        else
-            break;
-    }
-    switch (i)
-    {
-    case 0:
+    std::cout<<"Identify by pointer: ";
+    A *a = dynamic_cast<A*>(p);
+    B *b = dynamic_cast<B*>(p);
+    C *c = dynamic_cast<C*>(p);
+    
+    if (a) {
         std::cout<<"type is A"<<std::endl;
-        break;
-    case 1:
+        return;
+    }
+    else if (b) {
         std::cout<<"type is B"<<std::endl;
-        break;
-    case 2:
+        return;
+    }
+    else if (c)
+    {
         std::cout<<"type is C"<<std::endl;
-        break;
-    default:
-        break;
+        return;
+    }
+    else {
+        std::cout<<"has no type"<<std::endl;
+    }
+}
+
+void identify(Base& p)
+{
+    std::cout<<"Identify by Reference: ";
+    try {
+    A a = dynamic_cast<A&>(p);
+    std::cout<<"type is A"<<std::endl;
+    return;
+    } catch (std::bad_cast e) {
+    }
+    try {
+    B b = dynamic_cast<B&>(p);
+    std::cout<<"type is B"<<std::endl;
+    return;
+    } catch (std::bad_cast e) {
+    }
+    try {
+    C c = dynamic_cast<C&>(p);
+    std::cout<<"type is C"<<std::endl;
+    return;
+    } catch (std::bad_cast e) {
     }
 }
 
@@ -61,4 +80,6 @@ int main()
     Base *base;
     base = generate();
     identify(base);
+    if(base)
+        identify(*base);
 }

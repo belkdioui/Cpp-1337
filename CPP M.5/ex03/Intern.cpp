@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 10:25:21 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/01 16:47:30 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:38:00 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Intern::~Intern(){};
 AForm* Intern::makeForm(std::string name, std::string target)
 {
   int i ;
-  AForm *form=nullptr;
+  AForm *form=NULL;
   std::string NameForm[3]={"robotomy request", "shrubbery creation", "presidential pardon"};
   for(i = 0; i < 3 && NameForm[i]!=name ; i++)
   {}
@@ -48,7 +48,7 @@ AForm* Intern::makeForm(std::string name, std::string target)
     std::cout<<"name form dosen't existe"<<std::endl;
     return(form);
   }
-  std::cout<<"Intern creates"<<name<<std::endl;
+  std::cout<<"Intern creates "<<name<<std::endl;
   return form;
     
 }
