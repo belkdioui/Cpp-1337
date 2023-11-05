@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:25:05 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/05 10:39:30 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/05 22:46:06 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <_ctype.h>
 #include <algorithm>
 #include <cctype>
+#include <climits>
 #include <cstdio>
 #include <sstream>
 #include <string>
@@ -22,7 +23,7 @@
 
 int ret_float(std::string str)
 {
-    if (str == "nanf" || str == "+inff" || str == "-inff") 
+    if (str == "nanf" || str == "+inff" || str == "-inff" || str == "inff") 
         return 1;
     int comma = 0;
     if (str.back() == 'f' && str.find(".") < str.length() - 1 && str.length() > 2) 
@@ -59,13 +60,15 @@ int ret_int(std::string str)
             return (0);
         if (i != 0 && (str[i] == '+' || str[i] == '-'))
             return (0);
+        if ((str[i] == '+' || str[i] == '-') && str.length() == 1)
+            return (0);
     }
     return (3);
 }
 
 int ret_double(std::string str)
 {
-    if (str == "nan" || str == "+inf" || str == "-inf") 
+    if (str == "nan" || str == "+inf" || str == "-inf" || str == "inf") 
         return 4;
     int comma = 0;
     if (str.find(".")) 
@@ -88,11 +91,53 @@ int ret_double(std::string str)
 }
 void print_char(std::string str, int type)
 {
+    if(str.length() == 0)
+    {
+        std::cout<<"char: "<<"impossible"<<std::endl;
+        return ;
+    }
     if(type == 3)
     {
         int integer;
         std::stringstream ss(str);
         ss >> integer;
+        if ((integer >= 0 && integer <= 31) || integer == 127) 
+        {
+            std::cout<<"char: "<<"Non displayable"<<std::endl;
+            return ;
+        }
+        else if (integer >= 32 && integer < 127)
+        {
+            std::cout<<"char: "<<static_cast<char>(integer)<<std::endl;
+            return ;
+        }
+    }
+    else if (type == 1)
+    {
+        str.pop_back();
+        std::stringstream ss(str);
+        float floatnum;
+        ss>>floatnum;
+        int integer;
+        integer = static_cast<int>(floatnum);
+        if ((integer >= 0 && integer <= 31) || integer == 127) 
+        {
+            std::cout<<"char: "<<"Non displayable"<<std::endl;
+            return ;
+        }
+        else if (integer >= 32 && integer < 127)
+        {
+            std::cout<<"char: "<<static_cast<char>(integer)<<std::endl;
+            return ;
+        }
+    }
+    else if (type == 4)
+    {
+        std::stringstream ss(str);
+        double db;
+        ss>>db;
+        int integer;
+        integer = static_cast<int>(db);
         if ((integer >= 0 && integer <= 31) || integer == 127) 
         {
             std::cout<<"char: "<<"Non displayable"<<std::endl;
@@ -115,7 +160,7 @@ void print_char(std::string str, int type)
 
 void print_int(std::string str, int type)
 {
-    if (str == "nan" || str == "+inf" || str == "-inf" || str == "nanf" || str == "+inff" || str == "-inff")
+    if (str == "nan" || str == "+inf" || str == "-inf" || str == "nanf" || str == "+inff" || str == "-inff" || str == "inf" || str == "inff" || str.length() == 0)
     { 
         std::cout<<"int: "<<"impossible"<<std::endl;
         return ;
@@ -125,6 +170,10 @@ void print_int(std::string str, int type)
         int integer;
         std::stringstream ss(str);
         ss >> integer;
+        if (integer >= INT_MAX || integer <= INT_MIN) {
+            std::cout<<"int: "<<"impossible"<<std::endl;
+            return ;
+        }
         std::cout<<"int: "<<integer<<std::endl;
         return ;
     }
@@ -143,6 +192,11 @@ void print_int(std::string str, int type)
         std::stringstream ss(str);
         float floatnum;
         ss>>floatnum;
+        if (static_cast<int>(floatnum) >= INT_MAX || static_cast<int>(floatnum) <= INT_MIN) 
+        {
+            std::cout<<"int: "<<"impossible"<<std::endl;
+            return ;
+        }
         std::cout<<"int: "<<static_cast<int>(floatnum)<<std::endl;
         return;
     }
@@ -151,6 +205,11 @@ void print_int(std::string str, int type)
         std::stringstream ss(str);
         double db;
         ss>>db;
+        if (static_cast<int>(db) >= INT_MAX || static_cast<int>(db) <= INT_MIN) 
+        {
+            std::cout<<"int: "<<"impossible"<<std::endl;
+            return ;
+        }
         std::cout<<"int: "<<static_cast<int>(db)<<std::endl;
         return;
     }
@@ -159,13 +218,30 @@ void print_int(std::string str, int type)
 
 void print_float(std::string str, int type)
 {
+    if(str.length() == 0)
+    {
+        std::cout<<"float: "<<"impossible"<<std::endl;
+        return ;
+    }
     if(type == 3)
     {
-        int integer;
+        float floatnum;
         std::stringstream ss(str);
-        ss >> integer;
-        std::cout<<"float: "<<static_cast<float>(integer)<<".0f"<<std::endl;
+        ss >> floatnum;
+        if(floatnum <= 1.17549e-038 || floatnum >= 3.40282e+038)
+            std::cout<<"float: "<<static_cast<float>(floatnum)<<"f"<<std::endl;
+        else
+            std::cout<<"float: "<<floatnum<<".0f"<<std::endl;
         return ;
+    }
+    else if (type == 2)
+    {
+       int integer = static_cast<int>(str[0]);
+        if (integer >= 32 && integer < 127)
+        {
+            std::cout<<"float: "<<static_cast<float>(integer)<<".0f"<<std::endl;
+            return ;
+        }
     }
     else if (type == 1)
     {
@@ -174,7 +250,12 @@ void print_float(std::string str, int type)
         float floatnum;
         ss>>floatnum;
         if((floatnum / static_cast<int>(floatnum)) == 1 || floatnum == 0)
-            std::cout<<"float: "<< floatnum <<".0f"<<std::endl;
+        {
+            if(floatnum <= 1.17549e-038 || floatnum >= 3.40282e+038)
+                std::cout<<"float: "<<static_cast<float>(floatnum)<<"f"<<std::endl;
+            else
+              std::cout<<"float: "<<floatnum<<".0f"<<std::endl;
+        }
         else
             std::cout<<"float: "<< floatnum <<"f"<<std::endl;
         return;
@@ -185,9 +266,9 @@ void print_float(std::string str, int type)
         double db;
         ss>>db;
         if((db / static_cast<int>(db)) == 1 || db == 0)
-            std::cout<<"float: "<< db <<".0f"<<std::endl;
+            std::cout<<"float: "<< static_cast<float>(db) <<".0f"<<std::endl;
         else
-            std::cout<<"float: "<< db <<"f"<<std::endl;
+            std::cout<<"float: "<< static_cast<float>(db) <<"f"<<std::endl;
         return;
     }
      std::cout<<"float: "<<"impossible"<<std::endl;
@@ -195,24 +276,41 @@ void print_float(std::string str, int type)
 
 void print_db(std::string str, int type)
 {
+    if(str.length() == 0)
+    {
+        std::cout<<"double: "<<"impossible"<<std::endl;
+        return ;
+    }
     if(type == 3)
     {
-        int integer;
+        double db;
         std::stringstream ss(str);
-        ss >> integer;
-        std::cout<<"double: "<<static_cast<double>(integer)<<".0"<<std::endl;
+        ss >> db;
+        if(db <= 2.22507e-308 || db >= 1.79769e+308)
+            std::cout<<"double: "<<db<<std::endl;
+        else
+            std::cout<<"double: "<<db<<".0"<<std::endl;
         return ;
+    }
+    else if (type == 2)
+    {
+       int integer = static_cast<int>(str[0]);
+        if (integer >= 32 && integer < 127)
+        {
+            std::cout<<"double: "<<static_cast<double>(integer)<<".0"<<std::endl;
+            return ;
+        }
     }
     else if (type == 1)
     {
         str.pop_back();
         std::stringstream ss(str);
-        float floatnum;
-        ss>>floatnum;
-        if((floatnum / static_cast<int>(floatnum)) == 1 || floatnum == 0)
-            std::cout<<"double: "<< floatnum <<".0"<<std::endl;
+        double db;
+        ss>>db;
+        if((db / static_cast<int>(db)) == 1 || db == 0)
+            std::cout<<"double: "<< static_cast<double>(db) <<".0"<<std::endl;
         else
-            std::cout<<"double: "<< floatnum <<std::endl;
+            std::cout<<"double: "<< static_cast<double>(db) <<std::endl;
         return;
     }
     else if (type == 4)
