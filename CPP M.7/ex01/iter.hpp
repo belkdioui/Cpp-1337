@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Base.hpp                                           :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 08:40:23 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/05 22:49:46 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/11/05 23:54:10 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/07 11:04:04 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASE_H
-#define BASE_H
+#ifndef ITER_H
+#define ITER_H
 
-#include<iostream>
-#include<cstdlib>
+#include <iostream>
 
-class Base
+template<typename T>
+void iter(T* arr, int len, void change_value(T&))
 {
-    public:
-        virtual ~Base();
-};
+    for (int i=0; len > i; i++) {
+        change_value(arr[i]);
+    }
+}
+
+template<typename T>
+void change_value(T& a)
+{
+    a++;
+    std::cout<<a<<std::endl;
+} 
 
 #endif

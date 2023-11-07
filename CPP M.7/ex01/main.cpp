@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Base.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 08:40:23 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/05 22:49:46 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/11/06 14:20:53 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/06 14:39:24 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASE_H
-#define BASE_H
+#include "iter.hpp"
 
-#include<iostream>
-#include<cstdlib>
-
-class Base
+int main()
 {
-    public:
-        virtual ~Base();
-};
+    int arr_int[]={0,1,5,6,9};
+    double arr_db[]={0.5,65.68, 98.54 ,65.6 ,9.7};
 
-#endif
+    iter(arr_int, 5, change_value<int>);
+    iter(arr_db, 5, change_value<double>);
+}
