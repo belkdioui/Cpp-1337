@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:05:47 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/07 12:20:25 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:13:39 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ class Array
         Array(Array& obj)
         {
             arr = new T[obj.size]();
-            for (unsigned int i = 0; i < obj.size; i++) {
-              arr[i] = obj.arr[i];  
-            }
+            *this = obj;
         }
         Array& operator=(Array& obj)
         {
@@ -39,21 +37,20 @@ class Array
             }
             return *this;
         }
+        
         ~Array() {
-        delete[] arr;
-         }
+            delete[] arr;
+        }
 
-         int get_size() {return size;}
+        int get_size() {return size;}
 
          T& operator[](unsigned int index)
          {
             if (index >= size)
-            {
                 throw std::out_of_range("Index out of range");
-            }
             return arr[index];
          }
-    
+
     private:
         T *arr;
         unsigned int size;

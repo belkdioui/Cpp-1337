@@ -5,15 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/09 13:01:20 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/11/09 14:20:51 by bel-kdio         ###   ########.fr        #
+#    Created: 2023/11/09 18:50:23 by bel-kdio          #+#    #+#              #
+#    Updated: 2023/11/09 18:51:03 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-SRC = main.cpp
+SRC = main.cpp 
 OBJ = $(SRC:.cpp=.o)
-NAME = easyfind
+NAME = Mutated
 RM =rm -rf
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
