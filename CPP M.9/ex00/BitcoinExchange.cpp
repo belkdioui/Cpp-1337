@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 21:33:51 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/14 22:07:34 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:26:25 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,22 @@ int date_error_and_printing(std::string& date)
             throw std::runtime_error(date);
         if(date.find(" ") != date.size() - 1 || sep1 != '-' || sep2 != '-')
             throw std::runtime_error(date);
-        if((month > 0 && month < 13) && (day > 0 && day < 31) && (year > 2009 && year < 2023))
+        if((month > 0 && month < 13) && (day > 0 && day <= 31) && (year > 2009 && year < 2023))
+        {
+            if(!(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12))
+            {
+                if(month == 2)
+                {
+                    if(((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) && day > 29)
+                        throw std::runtime_error(date);
+                    if (!((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) && day > 28)
+                        throw std::runtime_error(date);
+                }
+                else if(day == 31)
+                    throw std::runtime_error(date);
+            }
             return(0);
+        }
         else
             throw std::runtime_error(date);
     } catch (std::exception& e) {
@@ -57,16 +71,22 @@ void BitcoinExchange::value_error_and_printing(std::string& date,std::string& va
                     throw std::runtime_error("Error: not a positive number.");
                 else
                 {
-                    std::map<std::string, float>::iterator it = exchange.begin();
-                    date.pop_back();
-                    for (; it != exchange.end(); it++) 
+                    std::map<std::string, float>::iterator it = exchange.end();
+                    // date.pop_back();
+                    it--;
+                    for (; it != exchange.begin(); --it) 
                     {
-                        if (date <= it->first)
+                        // std::cout<<date<<" "<<it->first<<std::endl;
+                        if (date >= it->first)
                         {
                             std::cout<< date<< " => "<<v<<" = "<<it->second * v<<std::endl;
                             break;
                         }
-                    } 
+                    }
+                    if (it == exchange.begin() && date >= it->first)
+                    {
+                        std::cout << date << " => " << v << " = " << it->second * v << std::endl;
+                    }
                 }
             }
             else
@@ -112,6 +132,7 @@ BitcoinExchange::~BitcoinExchange(){}
 
 void BitcoinExchange::fill_db()
 {
+    exchange["2009-01-01"]=0.7;
     exchange["2011-01-03"]=0.3;
     exchange["2011-01-04"]=1;
     exchange["2011-01-05"]=2;
