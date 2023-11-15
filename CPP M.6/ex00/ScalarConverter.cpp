@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:25:05 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/05 22:46:06 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:33:56 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,9 @@ void print_float(std::string str, int type)
     {
         float floatnum;
         std::stringstream ss(str);
+        
         ss >> floatnum;
+        
         if(floatnum <= 1.17549e-038 || floatnum >= 3.40282e+038)
             std::cout<<"float: "<<static_cast<float>(floatnum)<<"f"<<std::endl;
         else

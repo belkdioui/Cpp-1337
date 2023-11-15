@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:04:54 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/10 11:29:05 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:16:03 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ class MutantStack : public std::stack<T>
             return *this;
         };
         ~MutantStack(){};
-        // typedef typename std::deque<T>::iterator iterator;
         typedef typename std::stack<T>::container_type::iterator iterator;
         iterator begin(){ return this->c.begin();}
         iterator end(){ return this->c.end();}

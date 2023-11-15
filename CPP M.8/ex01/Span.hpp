@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:14:37 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/09 18:21:55 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:15:22 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Span
         void print_cont();
         int shortestSpan();
         int longestSpan();
+        void addrangenumber(std::vector<int>::iterator first, std::vector<int>::iterator last);
         
     private:
         unsigned int size;

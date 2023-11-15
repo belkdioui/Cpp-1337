@@ -5,38 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 15:49:52 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/13 10:05:01 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/11/12 21:04:23 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/14 11:37:34 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
-#include <exception>
-#include <vector>
+#include "BitcoinExchange.hpp"
 
-int main()
+int main(int ac, char **av)
 {
-    Span sp=Span(12);
-    std::vector<int> vect;
     try {
-    sp.addNumber(6);
-    sp.addNumber(3);
-    sp.addNumber(17);
-    sp.addNumber(9);
-    sp.addNumber(11);
-    vect.push_back(1);
-    vect.push_back(2);
-    vect.push_back(3);
-    vect.push_back(4);
-    vect.push_back(5);
-    vect.push_back(6);
-    sp.print_cont();
-    sp.addrangenumber(vect.begin(), vect.end());
-    std::cout<<sp.shortestSpan()<<std::endl;
-    std::cout<<sp.longestSpan()<<std::endl;
-    sp.print_cont();
+        std::ifstream in(av[1]);
+        if(ac != 2 || !in.is_open())
+            throw std::runtime_error("Error: could not open file.");
+        BitcoinExchange exchange(in);
+    
     } catch (std::exception& e) {
         std::cout<<e.what()<<std::endl;
     }
-
 }

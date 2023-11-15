@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 12:59:36 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/13 10:01:04 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/11/14 12:33:26 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/14 14:17:40 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
-#include <exception>
+#ifndef RPN_H
+#define RPN_H
 
-int main()
+#include <iostream>
+#include <stack>
+#include <sstream>
+
+class RPN
 {
-    std::vector<int> cont;
-    cont.push_back(1);
-    cont.push_back(5);
-    cont.push_back(3);
-    cont.push_back(4);
-    cont.push_back(2);
-    cont.push_back(2);
-    try {
-        easyfind<int>(cont, 2);
-    } catch (std::exception &e) {
-        std::cout<<e.what()<<std::endl;
-    }
-}
+    private:
+        std::stack<std::string> st;
+        RPN();
+        RPN(const RPN& obj);
+        RPN& operator=(const RPN& obj);
+    
+    public:
+        RPN(std::string av);
+        ~RPN();
+    
+};
+
+#endif

@@ -5,15 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/09 13:01:20 by bel-kdio          #+#    #+#              #
-#    Updated: 2023/11/12 13:14:16 by bel-kdio         ###   ########.fr        #
+#    Created: 2023/11/14 12:32:23 by bel-kdio          #+#    #+#              #
+#    Updated: 2023/11/14 19:04:11 by bel-kdio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
-SRC = main.cpp
+SRC = main.cpp RPN.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = easyfind
+NAME = RPN
 RM = rm -rf
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
@@ -23,7 +23,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CXX) $(CFLAGS) $^ -o $@
 
-%.o: %.cpp *.hpp
+%.o: %.cpp %.hpp
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 %.o: %.cpp

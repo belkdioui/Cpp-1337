@@ -5,26 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 12:59:36 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/13 10:01:04 by bel-kdio         ###   ########.fr       */
+/*   Created: 2023/11/14 12:33:31 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/14 14:08:33 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
-#include <exception>
+#include "RPN.hpp"
+#include <stack>
 
-int main()
+int main(int ac, char **av)
 {
-    std::vector<int> cont;
-    cont.push_back(1);
-    cont.push_back(5);
-    cont.push_back(3);
-    cont.push_back(4);
-    cont.push_back(2);
-    cont.push_back(2);
-    try {
-        easyfind<int>(cont, 2);
-    } catch (std::exception &e) {
-        std::cout<<e.what()<<std::endl;
+    if(ac == 2)
+    {
+        try {
+            RPN rpn(av[1]);
+        } catch (std::exception &e) {
+            std::cout<<e.what()<<std::endl;
+        }
     }
 }

@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 07:42:37 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/10 11:40:40 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:07:24 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void test_1()
     MutantStack<int>::iterator it = mstack.begin();
     MutantStack<int>::iterator ite = mstack.end();
     ++it;
-    std::cout <<"end :"<< *ite << std::endl;
     --it;
     while (it != ite)
     {
