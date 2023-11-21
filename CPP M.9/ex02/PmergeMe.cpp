@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/21 14:24:23 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:27:19 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ void PmergeMe::insert_pend_in_main(std::deque<std::deque<int> > &main_chaine,std
                 number_of_comparaison++;
             if(it_b->back() < it_b_m->back() && cal_size(it_b->begin(), it_b->end()) == cal_size(it_b_m->begin(), it_b_m->end()))
             {
-                std::cout<<it_b->back()<<" "<<it_b_m->back()<<std::endl;
                 inserted = true;
                 main_chaine.insert(it_b_m, *it_b);
                 pend.pop_front();
@@ -144,7 +143,10 @@ void PmergeMe::insert_pend_in_main(std::deque<std::deque<int> > &main_chaine,std
             
         }
         if(!inserted)
-            main_chaine.insert(main_chaine.end(), *it_b);   
+        {
+            main_chaine.insert(main_chaine.end(), *it_b);
+            pend.pop_front();   
+        }
         for (std::deque<std::deque<int> >::iterator it_b_m=main_chaine.begin() ; it_b_m != main_chaine.end(); it_b_m++) 
         {
             if(save_odd >= 0 && size_of_ele == 1 && save_odd < it_b_m->back())
