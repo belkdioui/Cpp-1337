@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:19:00 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/21 09:42:10 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:51:21 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ class PmergeMe{
         std::deque<std::deque<int> > pend;
         int size_of_ele;
         int save_odd;
+        int number_of_comparaison;
         PmergeMe();
         PmergeMe(const PmergeMe& obj);
         PmergeMe operator=(const PmergeMe& obj);

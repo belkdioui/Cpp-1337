@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/21 10:54:08 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:24:23 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 #include <ostream>
 #include <stdexcept>
 
+int cal_size(std::deque<int>::iterator first, std::deque<int>::iterator last)
+{
+    int index = 0;
+    for (; first != last; ++first)
+        index++;
+    return(index);
+}
 
 std::deque<std::deque<int> > PmergeMe::make_pairs(std::deque<int>& all_num)
 {
@@ -41,10 +48,14 @@ std::deque<std::deque<int> > PmergeMe::make_pairs(std::deque<int>& all_num)
 
 void PmergeMe::sort_pairs(std::deque<std::deque<int> > &pairs)
 {
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= size_of_ele; std::advance(it_b, 2))
+    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= 2; std::advance(it_b, 2))
     {
+            number_of_comparaison ++;
+        // std::cout<<std::distance(it_b, pairs.end()) <<"****"<< size_of_ele+1<<std::endl;
         if (it_b->back() > std::next(it_b)->back())
+        {
             std::swap(*(it_b), *std::next(it_b));
+        }
     }
 }
 
@@ -121,9 +132,10 @@ void PmergeMe::insert_pend_in_main(std::deque<std::deque<int> > &main_chaine,std
     {
         for (std::deque<std::deque<int> >::iterator it_b_m=main_chaine.begin() ; it_b_m != main_chaine.end(); it_b_m++) 
         {
-            std::cout<<it_b->back()<<" "<<it_b_m->back()<<std::endl;
-            if(it_b->back() < it_b_m->back())
+                number_of_comparaison++;
+            if(it_b->back() < it_b_m->back() && cal_size(it_b->begin(), it_b->end()) == cal_size(it_b_m->begin(), it_b_m->end()))
             {
+                std::cout<<it_b->back()<<" "<<it_b_m->back()<<std::endl;
                 inserted = true;
                 main_chaine.insert(it_b_m, *it_b);
                 pend.pop_front();
@@ -226,6 +238,7 @@ void PmergeMe::print_container(std::deque<int>::iterator first, std::deque<int>:
 PmergeMe::PmergeMe(std::string range)
 {
     size_of_ele = 1;
+    number_of_comparaison = 0;
     save_odd = -1;
     std::deque<std::deque<int> > pairs;
     std::istringstream iss(range);
@@ -236,6 +249,8 @@ PmergeMe::PmergeMe(std::string range)
             throw std::runtime_error("Error");
     merge_insert_sort(pairs);
     print_container(all_num.begin(), all_num.end());
+    
+    std::cout<<number_of_comparaison<<std::endl;
 }
 
 PmergeMe::~PmergeMe(){}
