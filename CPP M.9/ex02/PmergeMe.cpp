@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/21 10:44:13 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:54:08 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ std::deque<std::deque<int> > PmergeMe::make_pairs(std::deque<int>& all_num)
 
 void PmergeMe::sort_pairs(std::deque<std::deque<int> > &pairs)
 {
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); std::distance(it_b, pairs.end()) > size_of_ele; std::advance(it_b, 2))
+    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= size_of_ele; std::advance(it_b, 2))
     {
         if (it_b->back() > std::next(it_b)->back())
             std::swap(*(it_b), *std::next(it_b));
@@ -133,17 +133,17 @@ void PmergeMe::insert_pend_in_main(std::deque<std::deque<int> > &main_chaine,std
         }
         if(!inserted)
             main_chaine.insert(main_chaine.end(), *it_b);   
-        // for (std::deque<std::deque<int> >::iterator it_b_m=main_chaine.begin() ; it_b_m != main_chaine.end(); it_b_m++) 
-        // {
-        //     if(save_odd >= 0 && size_of_ele == 1 && save_odd < it_b_m->back())
-        //     {
-        //         std::deque<int> pair;
-        //         pair.push_back(save_odd);
-        //         main_chaine.insert(it_b_m, pair);
-        //         save_odd = -1;
-        //         break;
-        //     }
-        // }
+        for (std::deque<std::deque<int> >::iterator it_b_m=main_chaine.begin() ; it_b_m != main_chaine.end(); it_b_m++) 
+        {
+            if(save_odd >= 0 && size_of_ele == 1 && save_odd < it_b_m->back())
+            {
+                std::deque<int> pair;
+                pair.push_back(save_odd);
+                main_chaine.insert(it_b_m, pair);
+                save_odd = -1;
+                break;
+            }
+        }
     }
     std::cout<<"main_chaine : "<<std::endl;;
     for (std::deque<std::deque<int> >::iterator it_b= main_chaine.begin(); it_b != main_chaine.end(); std::advance(it_b, 1))
