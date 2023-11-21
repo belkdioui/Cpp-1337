@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/21 18:14:38 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:40:00 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <ostream>
 #include <stdexcept>
 
-
+int number_of_comparaison = 0;
 int cal_size(std::deque<int>::iterator first, std::deque<int>::iterator last)
 {
     int index = 0;
@@ -26,6 +26,7 @@ int cal_size(std::deque<int>::iterator first, std::deque<int>::iterator last)
         index++;
     return(index);
 }
+
 void is_sorted(std::deque<int>::iterator first, std::deque<int>::iterator last, size_t size)
 {
     size_t s = cal_size(first, last);
@@ -38,11 +39,11 @@ void is_sorted(std::deque<int>::iterator first, std::deque<int>::iterator last, 
     {
         if(*first > *std::next(first))
         {
-            std::cout<<"\n NO"<<std::endl;
+            std::cout<<"\nNO"<<std::endl;
             return;
         }
     }
-    std::cout<<"\n YES"<<std::endl;
+    std::cout<<"\nYES"<<std::endl;
 }
 
 std::deque<std::deque<int> > PmergeMe::make_pairs(std::deque<int>& all_num)
@@ -154,27 +155,28 @@ void PmergeMe::creat_main_and_pend(std::deque<std::deque<int> > &pairs)
     std::cout<<std::endl;
 }
 
+bool compareBack(const std::deque<int>& a, const int& b) 
+{
+    number_of_comparaison++;
+    return a.back() < b;
+}
 
 void PmergeMe::insert_pend_in_main(std::deque<std::deque<int> > &main_chaine,std::deque<std::deque<int> >& pend)
 {   
-    for (std::deque<std::deque<int> >::iterator it_b=pend.begin(); it_b != pend.end(); it_b++)
+    for (std::deque<std::deque<int> >::iterator it_b = pend.begin(); it_b != pend.end(); it_b++) 
     {
         bool inserted = false;
-        for (std::deque<std::deque<int> >::iterator it_b_m=main_chaine.begin() ; it_b_m != main_chaine.end(); it_b_m++) 
+        std::deque<std::deque<int> >::iterator it_b_m = std::lower_bound(main_chaine.begin(), main_chaine.end(), it_b->back(), compareBack);
+        if (it_b_m != main_chaine.end() && cal_size(it_b->begin(), it_b->end()) == cal_size(it_b_m->begin(), it_b_m->end()))
         {
-                number_of_comparaison++;
-            if(it_b->back() < it_b_m->back() && cal_size(it_b->begin(), it_b->end()) == cal_size(it_b_m->begin(), it_b_m->end()))
-            {
-                inserted = true;
-                main_chaine.insert(it_b_m, *it_b);
-                pend.pop_front();
-                break;
-            }
+            inserted = true;
+            main_chaine.insert(it_b_m, *it_b);
+            pend.pop_front();
         }
-        if(!inserted)
+        if (!inserted) 
         {
             main_chaine.insert(main_chaine.end(), *it_b);
-            pend.pop_front();   
+            pend.pop_front();
         }
     }
     std::cout<<"main_chaine : "<<std::endl;;
@@ -258,7 +260,6 @@ void PmergeMe::print_container(std::deque<int>::iterator first, std::deque<int>:
 PmergeMe::PmergeMe(std::string range)
 {
     size_of_ele = 1;
-    number_of_comparaison = 0;
     save_odd = -1;
     std::deque<std::deque<int> > pairs;
     std::istringstream iss(range);
