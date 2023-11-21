@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:19:00 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/20 12:10:44 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/21 09:42:10 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ class PmergeMe{
     public:
         PmergeMe(std::string range);
         void print_container(std::deque<int>::iterator first, std::deque<int>::iterator last);
-        void merge_insert_sort(std::deque<std::deque<int> >, int);
-        std::deque<std::deque<int> >make_pairs(std::deque<int>&, int);
+        void merge_insert_sort(std::deque<std::deque<int> >);
+        std::deque<std::deque<int> >make_pairs(std::deque<int>&);
         void sort_pairs(std::deque<std::deque<int> > &);
         void copy_db_cont_to_one(std::deque<std::deque<int> >);
         int pairs_with_same_ele(std::deque<std::deque<int> >);
