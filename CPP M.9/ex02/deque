@@ -1,0 +1,447 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sv                                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/23 17:18:16 by bel-kdio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "PmergeMe.hpp"
+#include <algorithm>
+#include <cstddef>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <ostream>
+#include <stdexcept>
+#include <utility>
+
+int number_of_comparaison = 0;
+int cal_size(deq_int_iter first, deq_int_iter last)
+{
+    int index = 0;
+    for (; first != last; ++first)
+        index++;
+    return(index);
+}
+
+void is_sorted(deq_int_iter first, deq_int_iter last, size_t size)
+{
+    size_t s = cal_size(first, last);
+    if(s != size)
+    {
+        std::cout<<"size deff"<<std::endl;
+        return;
+    }
+    for (; first != last - 1 ; ++first)
+    {
+        if(*first > *std::next(first))
+        {
+            std::cout<<"\nNO"<<std::endl;
+            return;
+        }
+    }
+    std::cout<<"\nYES"<<std::endl;
+}
+
+deq_deq_int PmergeMe::make_pairs(deq_int& all_num)
+{
+    deq_deq_int pairs;
+    deq_int_iter it_b = all_num.begin();
+    for (; std::distance(it_b, all_num.end()) >= size_of_ele; std::advance(it_b, size_of_ele))
+    {
+        if (std::distance(it_b, all_num.end()) >= size_of_ele)
+        {
+            deq_int pair(it_b, it_b + size_of_ele);
+            pairs.push_back(pair);
+        }
+    }
+    if (it_b != all_num.end())
+    {
+        deq_int pair(it_b, all_num.end());
+        pairs.push_back(pair);
+    }
+    return pairs;
+}
+
+void PmergeMe::sort_pairs(deq_deq_int &pairs)
+{
+    for (deq_deq_int_iter it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= 2; std::advance(it_b, 2))
+    {
+            number_of_comparaison ++;
+        if (it_b->back() > std::next(it_b)->back() && cal_size(it_b->begin(), it_b->end()) == cal_size(std::next(it_b)->begin(), std::next(it_b)->end()))
+        {
+            std::swap(*(it_b), *std::next(it_b));
+        }
+    }
+}
+
+void PmergeMe::copy_db_cont_to_one(deq_deq_int pairs)
+{
+    all_num.clear();
+    for (deq_deq_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+    {
+        for (deq_int_iter it_b1= it_b->begin(); it_b1 != it_b->end(); std::advance(it_b1, 1)) 
+            all_num.push_back(*it_b1);
+    }
+    if (save_odd >= 0)
+    {
+        all_num.push_back(save_odd);
+        save_odd = -1;
+    }
+}
+
+int PmergeMe::pairs_with_same_ele(deq_deq_int pairs)
+{
+    int num_of_pairs = 0;
+
+    for (deq_deq_int_iter it_b= pairs.begin(); it_b != pairs.end() ; std::advance(it_b, 1))
+    {
+        if (it_b->size() * 2 == static_cast<size_t>(size_of_ele)) 
+            num_of_pairs++;
+    }
+    return num_of_pairs;
+}
+
+void    PmergeMe::print_pend()
+{
+    std::cout<<"pend : "<<std::endl;;
+    for (deq_pair::iterator it = pend.begin(); it != pend.end(); std::advance(it, 1))
+    {
+        std::cout<<"first : ";
+        print_container(it->first.begin(), it->first.end());
+        std::cout<<"second : ";
+        print_container(it->second->begin(), it->second->end());
+    }
+    std::cout<<std::endl;
+}
+void    PmergeMe::print_mainchain()
+{
+    std::cout<<"main_chaine : "<<std::endl;;
+    for (deq_deq_int_iter it_b= main_chaine.begin(); it_b != main_chaine.end(); std::advance(it_b, 1))
+    {
+        print_container(it_b->begin(), it_b->end());
+    }
+    std::cout<<std::endl;
+}
+void PmergeMe::creat_main_and_pend(deq_deq_int &pairs)
+{
+    std::pair<std::deque<int>, deq_deq_int_iter> pair;
+    pend.clear();
+    main_chaine.clear();
+    pend.clear();
+    deq_deq_int_iter it_b = pairs.begin();
+    deq_deq_int_iter sv_iter;
+    main_chaine.insert(main_chaine.end(), *it_b);
+    ++it_b;
+    main_chaine.insert(main_chaine.end(), *it_b);
+    ++it_b;
+    for (; it_b != pairs.end(); ++it_b)
+    {
+        // std::cout<<"****** pend *******"<<std::endl;
+        // print_container(it_b->begin(), it_b->end());
+        sv_iter = main_chaine.end();
+        pair.first = *it_b;
+        if (static_cast<size_t>(size_of_ele) == it_b->size() && std::next(it_b) != pairs.end())
+        {
+            ++it_b;
+            sv_iter = main_chaine.insert(main_chaine.end(), *it_b);
+        }
+        // std::cout<<"****** sv iter *******"<<std::endl;
+        // print_container(sv_iter->begin(), sv_iter->end());
+        pair.second = sv_iter;
+        pend.push_back(pair);
+    }
+    print_mainchain();
+    print_pend();
+}
+
+
+bool compareBack(const deq_int& a, const int& b) 
+{
+    number_of_comparaison++;
+    return a.back() <= b;
+}
+
+void PmergeMe::update_iter(deq_deq_int_iter pos)
+{
+    for (deq_pair::iterator it_b = pend.begin(); it_b != pend.end(); it_b++)
+    {
+        if(it_b->second >= pos)
+        {
+            if (it_b->second != main_chaine.end())
+                ++it_b->second;
+                // it_b->second = main_chaine.end();
+            // ++it_b->second;
+            // if (it_b->second >= main_chaine.end())
+            //     it_b->second = main_chaine.end();
+        }
+    }
+}
+
+void PmergeMe::insert_pend_in_main()
+{   
+    // for (deq_pair::iterator it_b = pend.begin(); it_b != pend.end(); ++it_b) 
+    // {
+    //     bool inserted = false;
+    //     deq_deq_int_iter pos;
+    //     print_pend();
+    //     // print_container(it_b->first.begin(), it_b->first.end());
+    //     // std::cout<<"------------"<<std::endl;
+    //     // print_container(it_b->second->begin(), it_b->second->end());
+    //     std::cout<<std::endl;
+    //     deq_deq_int_iter it_b_m = std::lower_bound(main_chaine.begin(), it_b->second, it_b->first.back(), compareBack);
+    //     if (cal_size(it_b->first.begin(), it_b->first.end()) == cal_size(it_b_m->begin(), it_b_m->end()))
+    //     {
+    //         inserted = true;
+    //         pos = main_chaine.insert(it_b_m, it_b->first);
+    //         // update_iter(pos);
+    //         pend.erase(it_b);
+    //     }
+    //     if (!inserted) 
+    //     {
+    //         main_chaine.insert(main_chaine.end(), it_b->first);
+    //         pend.pop_front();
+    //     }
+    // }
+    deq_pair::iterator it_b = pend.begin();
+
+    while (it_b != pend.end()) 
+    {
+        deq_deq_int_iter pos;
+        if (main_chaine.front().size() == it_b->first.size())
+        {
+            deq_deq_int_iter it_b_m = std::lower_bound(main_chaine.begin(), it_b->second, it_b->first.back(), compareBack);
+            pos = main_chaine.insert(it_b_m, it_b->first);
+            update_iter(pos);
+        }
+        else {
+            main_chaine.insert(main_chaine.end(), it_b->first);
+        }
+        it_b++;
+    }
+    print_mainchain();
+    print_pend();
+}
+
+void PmergeMe::part_of_insertion(deq_deq_int &pairs)
+{
+    if (all_num.size() % 2 != 0)
+    {
+        save_odd = all_num.back();
+        all_num.pop_back();
+    }
+    size_of_ele /= 2;
+    pairs = make_pairs(all_num);
+    if(save_odd >= 0 && size_of_ele == 1)
+    {
+        deq_int pair;
+        pair.push_back(save_odd);
+        pairs.push_back(pair);
+        save_odd = -1;
+    }
+    for (deq_deq_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+    {
+        std::cout<<"pair before insertion : ";
+       print_container(it_b->begin(), it_b->end());
+    }
+    creat_main_and_pend(pairs);
+    insert_pend_in_main();
+    copy_db_cont_to_one(main_chaine);
+}
+
+void PmergeMe::merge_insert_sort(int depth, deq_deq_int pairs)
+{
+    if (all_num.size() % 2 != 0)
+    {
+        save_odd = all_num.back();
+        all_num.pop_back();
+    }
+    pairs = make_pairs(all_num);
+    
+    std::cout<<"pairs : "<<std::endl;
+    for (deq_deq_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+       print_container(it_b->begin(), it_b->end());
+    std::cout<<std::endl;
+
+    
+    sort_pairs(pairs);
+
+    for (deq_deq_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+    {
+        std::cout<<"pair after sorting : ";
+       print_container(it_b->begin(), it_b->end());
+    }
+    std::cout<<std::endl;
+
+    size_of_ele *= 2;
+    copy_db_cont_to_one(pairs);
+    std::cout<<"all_num : ";
+    print_container(all_num.begin(), all_num.end());
+    std::cout << "==============================================" << std::endl;
+    std::cout << "recurtion depth: " << depth << std::endl;
+    if(pairs_with_same_ele(pairs) > 3)
+        merge_insert_sort(depth + 1, pairs);
+    
+    std::cout << "==============================================" << std::endl;
+    std::cout << "reverce recurtion depth: " << depth << std::endl;
+    part_of_insertion(pairs);
+    std::cout << "NUMBER CMPS: " << number_of_comparaison << std::endl;
+}
+
+void PmergeMe::print_container(deq_int_iter first, deq_int_iter last)
+{
+    for (; first != last; ++first) {
+        std::cout<<*first<<" ";
+    }
+    std::cout<<std::endl;
+}
+
+PmergeMe::PmergeMe(std::string range)
+{
+    size_of_ele = 1;
+    save_odd = -1;
+    deq_deq_int pairs;
+    std::istringstream iss(range);
+    int num;
+    while(iss >> num)
+        all_num.push_back(num);
+    if(iss.eof() == num)
+            throw std::runtime_error("Error");
+    size_t size = all_num.size();
+    merge_insert_sort(0, pairs);
+    print_container(all_num.begin(), all_num.end());
+    is_sorted(all_num.begin(), all_num.end(), size);
+    std::cout<<number_of_comparaison<<std::endl;
+}
+
+PmergeMe::~PmergeMe(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/18 09:19:00 by bel-kdio          #+#    #+#             */
+/*   Updated: 2023/11/23 11:05:52 by bel-kdio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PMERGEME_H
+#define PMERGEME_H
+#include <deque>
+#include <stdexcept>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <utility>
+
+typedef std::deque<std::deque<int> > deq_deq_int ;
+typedef std::deque<int>::iterator deq_int_iter ;
+typedef std::deque<std::deque<int> >::iterator deq_deq_int_iter ;
+typedef std::deque<int> deq_int;
+typedef std::deque<std::pair<std::deque<int>, deq_deq_int_iter> > deq_pair ;
+
+class PmergeMe{
+    public:
+        PmergeMe(std::string range);
+        void    print_pend();
+void        print_mainchain();
+        void print_container(deq_int_iter first, deq_int_iter last);
+        void merge_insert_sort(int depth, deq_deq_int);
+        deq_deq_int make_pairs(deq_int&);
+        void sort_pairs(deq_deq_int &);
+        void copy_db_cont_to_one(deq_deq_int);
+        int pairs_with_same_ele(deq_deq_int);
+        void part_of_insertion(deq_deq_int&);
+        void creat_main_and_pend(deq_deq_int&);
+        void insert_pend_in_main();
+        void update_iter(deq_deq_int_iter pos);
+        ~PmergeMe();
+    
+    
+    private:
+        deq_int all_num;
+        deq_deq_int main_chaine;
+        deq_pair pend;
+        int size_of_ele;
+        int save_odd;
+        PmergeMe();
+        PmergeMe(const PmergeMe& obj);
+        PmergeMe operator=(const PmergeMe& obj);
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// for (deq_pair::iterator it_b = pend.begin(); it_b != pend.end(); ++it_b) 
+    // {
+    //     bool inserted = false;
+    //     deq_deq_int_iter pos;
+    //     print_pend();
+    //     // print_container(it_b->first.begin(), it_b->first.end());
+    //     // std::cout<<"------------"<<std::endl;
+    //     // print_container(it_b->second->begin(), it_b->second->end());
+    //     std::cout<<std::endl;
+    //     deq_deq_int_iter it_b_m = std::lower_bound(main_chaine.begin(), it_b->second, it_b->first.back(), compareBack);
+    //     if (cal_size(it_b->first.begin(), it_b->first.end()) == cal_size(it_b_m->begin(), it_b_m->end()))
+    //     {
+    //         inserted = true;
+    //         pos = main_chaine.insert(it_b_m, it_b->first);
+    //         // update_iter(pos);
+    //         pend.erase(it_b);
+    //     }
+    //     if (!inserted) 
+    //     {
+    //         main_chaine.insert(main_chaine.end(), it_b->first);
+    //         pend.pop_front();
+    //     }
+    // }

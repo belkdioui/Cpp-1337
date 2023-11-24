@@ -6,20 +6,64 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/21 20:40:00 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:44:35 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <algorithm>
-#include <cstddef>
-#include <deque>
-#include <iterator>
-#include <ostream>
-#include <stdexcept>
+#include <sys/_types/_time_t.h>
+#include <sys/_types/_timeval.h>
+#include <sys/select.h>
 
-int number_of_comparaison = 0;
-int cal_size(std::deque<int>::iterator first, std::deque<int>::iterator last)
+//*******************************************************************************//
+//*******************************        Vector    ******************************//
+//*******************************************************************************//
+
+int number_of_comparaison_vect = 0;
+
+void    PmergeMe::print_pend_vect()
+{
+    std::cout<<"pend : "<<std::endl;;
+    for (vect_pair::iterator it = pend_vect.begin(); it != pend_vect.end(); std::advance(it, 1))
+    {
+        std::cout<<"first : ";
+        print_container_vect(it->first.begin(), it->first.end());
+        std::cout<<"second : ";
+        if(it->second == main_chaine_vect.end())
+            std::cout<<"end"<<std::endl;
+        else
+            print_container_vect(it->second->begin(), it->second->end());
+    }
+    std::cout<<std::endl;
+}
+
+void PmergeMe::print_container_vect(vect_int_iter first, vect_int_iter last)
+{
+    for (; first != last; ++first) {
+        std::cout<<*first<<" ";
+    }
+    std::cout<<std::endl;
+}
+
+void PmergeMe::print_pairs_vect(vect_vect_int pairs)
+{
+    std::cout<<"pairs : "<<std::endl;
+    for (vect_vect_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+       print_container_vect(it_b->begin(), it_b->end());
+    std::cout<<std::endl;
+}
+
+void    PmergeMe::print_mainchain_vect()
+{
+    std::cout<<"main_chaine : "<<std::endl;;
+    for (vect_vect_int_iter it_b= main_chaine_vect.begin(); it_b != main_chaine_vect.end(); std::advance(it_b, 1))
+    {
+        print_container_vect(it_b->begin(), it_b->end());
+    }
+    std::cout<<std::endl;
+}
+
+int cal_size_vect(vect_int_iter first, vect_int_iter last)
 {
     int index = 0;
     for (; first != last; ++first)
@@ -27,9 +71,9 @@ int cal_size(std::deque<int>::iterator first, std::deque<int>::iterator last)
     return(index);
 }
 
-void is_sorted(std::deque<int>::iterator first, std::deque<int>::iterator last, size_t size)
+void is_sorted_vect(vect_int_iter first, vect_int_iter last, size_t size)
 {
-    size_t s = cal_size(first, last);
+    size_t s = cal_size_vect(first, last);
     if(s != size)
     {
         std::cout<<"size deff"<<std::endl;
@@ -46,210 +90,215 @@ void is_sorted(std::deque<int>::iterator first, std::deque<int>::iterator last, 
     std::cout<<"\nYES"<<std::endl;
 }
 
-std::deque<std::deque<int> > PmergeMe::make_pairs(std::deque<int>& all_num)
+vect_vect_int PmergeMe::make_pairs_vect(vect_int& all_num)
 {
-    std::deque<std::deque<int> > pairs;
-    std::deque<int>::iterator it_b = all_num.begin();
-    for (; std::distance(it_b, all_num.end()) >= size_of_ele; std::advance(it_b, size_of_ele))
+    vect_vect_int pairs;
+    vect_int_iter it_b = all_num.begin();
+    for (; std::distance(it_b, all_num.end()) >= size_of_ele_vect; std::advance(it_b, size_of_ele_vect))
     {
-        if (std::distance(it_b, all_num.end()) >= size_of_ele)
+        if (std::distance(it_b, all_num.end()) >= size_of_ele_vect)
         {
-            std::deque<int> pair(it_b, it_b + size_of_ele);
+            vect_int pair(it_b, it_b + size_of_ele_vect);
             pairs.push_back(pair);
         }
     }
     if (it_b != all_num.end())
     {
-        std::deque<int> pair(it_b, all_num.end());
+        vect_int pair(it_b, all_num.end());
         pairs.push_back(pair);
     }
     return pairs;
 }
 
-void PmergeMe::sort_pairs(std::deque<std::deque<int> > &pairs)
+void PmergeMe::sort_pairs_vect(vect_vect_int &pairs)
 {
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= 2; std::advance(it_b, 2))
+    for (vect_vect_int_iter it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= 2; std::advance(it_b, 2))
     {
-            number_of_comparaison ++;
-        if (it_b->back() > std::next(it_b)->back() && cal_size(it_b->begin(), it_b->end()) == cal_size(std::next(it_b)->begin(), std::next(it_b)->end()))
+            number_of_comparaison_vect ++;
+        if (it_b->back() > std::next(it_b)->back() && cal_size_vect(it_b->begin(), it_b->end()) == cal_size_vect(std::next(it_b)->begin(), std::next(it_b)->end()))
         {
             std::swap(*(it_b), *std::next(it_b));
         }
     }
 }
 
-void PmergeMe::copy_db_cont_to_one(std::deque<std::deque<int> > pairs)
+void PmergeMe::copy_db_cont_to_one_vect(vect_vect_int pairs)
 {
-    all_num.clear();
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+    all_num_vect.clear();
+    for (vect_vect_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
     {
-        for (std::deque<int>::iterator it_b1= it_b->begin(); it_b1 != it_b->end(); std::advance(it_b1, 1)) 
-            all_num.push_back(*it_b1);
+        for (vect_int_iter it_b1= it_b->begin(); it_b1 != it_b->end(); std::advance(it_b1, 1)) 
+            all_num_vect.push_back(*it_b1);
     }
-    if (save_odd >= 0)
+    if (save_odd_vect >= 0)
     {
-        all_num.push_back(save_odd);
-        save_odd = -1;
+        all_num_vect.push_back(save_odd_vect);
+        save_odd_vect = -1;
     }
 }
 
-int PmergeMe::pairs_with_same_ele(std::deque<std::deque<int> > pairs)
+int PmergeMe::pairs_with_same_ele_vect(vect_vect_int pairs)
 {
     int num_of_pairs = 0;
 
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); it_b != pairs.end() ; std::advance(it_b, 1))
+    for (vect_vect_int_iter it_b= pairs.begin(); it_b != pairs.end() ; std::advance(it_b, 1))
     {
-        if (it_b->size() * 2 == static_cast<size_t>(size_of_ele)) 
+        if (it_b->size() * 2 == static_cast<size_t>(size_of_ele_vect)) 
             num_of_pairs++;
     }
     return num_of_pairs;
 }
 
-void PmergeMe::creat_main_and_pend(std::deque<std::deque<int> > &pairs)
+bool compareBack_vect(const vect_int& a, const int& b) 
 {
-    main_chaine.clear();
-    pend.clear();
-    std::deque<std::deque<int> >::iterator it_b= pairs.begin();
-    size_t index = 0;
-    for (; it_b != pairs.end() && index != pairs.size(); std::advance(it_b, 1))
+    number_of_comparaison_vect++;
+    return a.back() <= b;
+}
+
+void PmergeMe::update_iter_vect(vect_vect_int_iter pos)
+{
+    for (vect_pair::iterator it_b = pend_vect.begin(); it_b != pend_vect.end(); it_b++)
     {
-        if(index == 0 || index == 1 )
+        if(it_b->second >= pos)
+            ++it_b->second;
+    }
+}
+
+void PmergeMe::creat_main_and_pend_vect(vect_vect_int &pairs)
+{   
+    std::pair<std::vector<int>, vect_vect_int_iter> pair;
+    vect_vect_int_iter it_b = pairs.begin();
+    vect_vect_int_iter sv_iter;
+    pend_vect.clear();
+    main_chaine_vect.clear();
+    main_chaine_vect.reserve(pairs.size());
+    pend_vect.reserve(pairs.size());
+    main_chaine_vect.insert(main_chaine_vect.end(), *it_b);
+    ++it_b;
+    main_chaine_vect.insert(main_chaine_vect.end(), *it_b);
+    ++it_b;
+    for (; it_b != pairs.end(); ++it_b)
+    {
+        sv_iter = main_chaine_vect.end();
+        pair.first = *it_b;
+        if (static_cast<size_t>(size_of_ele_vect) == it_b->size() && std::next(it_b) != pairs.end())
         {
-            std::deque<int> pair(it_b->begin(), it_b->end());
-            main_chaine.push_back(pair);
+            ++it_b;
+            sv_iter = main_chaine_vect.insert(main_chaine_vect.end(), *it_b);
         }
-        else if (index % 2 == 0){
-            std::deque<int> pair(it_b->begin(), it_b->end());
-            pend.push_back(pair);
-        }
-        else if (static_cast<size_t>(size_of_ele) == it_b->size()) 
-        {    
-            std::deque<int> pair(it_b->begin(), it_b->end());
-            main_chaine.push_back(pair);
+        pair.second = sv_iter;
+        pend_vect.push_back(pair);
+    }
+}
+
+void PmergeMe::insert_pend_in_main_vect()
+{   
+    vect_pair::iterator it_b = pend_vect.begin();
+    vect_pair::iterator save_erase;
+    vect_vect_int_iter pos;
+    vect_vect_int_iter it_b_m;
+    
+    while (it_b != pend_vect.end()) 
+    {
+        if (main_chaine_vect.front().size() == it_b->first.size())
+        {
+            it_b_m = std::lower_bound(main_chaine_vect.begin(), it_b->second, it_b->first.back(), compareBack_vect);
+            pos = main_chaine_vect.insert(it_b_m, it_b->first);
+            update_iter_vect(pos); 
         }
         else
-        {
-            std::deque<int> pair(it_b->begin(), it_b->end());
-            pend.push_back(pair);
-        }
-        index++;
+            main_chaine_vect.insert(main_chaine_vect.end(), it_b->first);
+        it_b++;
     }
-    if(save_odd >= 0 && size_of_ele == 1)
-    {
-        std::deque<int> pair;
-        pair.push_back(save_odd);
-        pend.insert(pend.end(), pair);
-        save_odd = -1;
-    }
-    std::cout<<"main_chaine : "<<std::endl;;
-    for (std::deque<std::deque<int> >::iterator it_b= main_chaine.begin(); it_b != main_chaine.end(); std::advance(it_b, 1))
-    {
-        print_container(it_b->begin(), it_b->end());
-    }
-    std::cout<<std::endl;
-    std::cout<<"pend : "<<std::endl;;
-    for (std::deque<std::deque<int> >::iterator it_b= pend.begin(); it_b != pend.end(); std::advance(it_b, 1))
-    {
-        print_container(it_b->begin(), it_b->end());
-    }
-    std::cout<<std::endl;
 }
 
-bool compareBack(const std::deque<int>& a, const int& b) 
+void PmergeMe::part_of_insertion_vect(vect_vect_int &pairs)
 {
-    number_of_comparaison++;
-    return a.back() < b;
+    if (all_num_vect.size() % 2 != 0)
+    {
+        save_odd_vect = all_num_vect.back();
+        all_num_vect.pop_back();
+    }
+    size_of_ele_vect /= 2;
+    pairs = make_pairs_vect(all_num_vect);
+    if(save_odd_vect >= 0 && size_of_ele_vect == 1)
+    {
+        vect_int pair;
+        pair.push_back(save_odd_vect);
+        pairs.push_back(pair);
+        save_odd_vect = -1;
+    }
+    creat_main_and_pend_vect(pairs);
+    insert_pend_in_main_vect();
+    copy_db_cont_to_one_vect(main_chaine_vect);
 }
 
-void PmergeMe::insert_pend_in_main(std::deque<std::deque<int> > &main_chaine,std::deque<std::deque<int> >& pend)
+void PmergeMe::merge_insert_sort_vect(int depth, vect_vect_int pairs)
+{
+    if (all_num_vect.size() % 2 != 0)
+    {
+        save_odd_vect = all_num_vect.back();
+        all_num_vect.pop_back();
+    }
+    pairs = make_pairs_vect(all_num_vect);
+    sort_pairs_vect(pairs);
+    size_of_ele_vect *= 2;
+    copy_db_cont_to_one_vect(pairs);
+    if(pairs_with_same_ele_vect(pairs) > 3)
+        merge_insert_sort_vect(depth + 1, pairs);
+    part_of_insertion_vect(pairs);
+}
+void PmergeMe::part_of_vect(std::string range)
 {   
-    for (std::deque<std::deque<int> >::iterator it_b = pend.begin(); it_b != pend.end(); it_b++) 
-    {
-        bool inserted = false;
-        std::deque<std::deque<int> >::iterator it_b_m = std::lower_bound(main_chaine.begin(), main_chaine.end(), it_b->back(), compareBack);
-        if (it_b_m != main_chaine.end() && cal_size(it_b->begin(), it_b->end()) == cal_size(it_b_m->begin(), it_b_m->end()))
-        {
-            inserted = true;
-            main_chaine.insert(it_b_m, *it_b);
-            pend.pop_front();
-        }
-        if (!inserted) 
-        {
-            main_chaine.insert(main_chaine.end(), *it_b);
-            pend.pop_front();
-        }
-    }
-    std::cout<<"main_chaine : "<<std::endl;;
-    for (std::deque<std::deque<int> >::iterator it_b= main_chaine.begin(); it_b != main_chaine.end(); std::advance(it_b, 1))
-    {
-        print_container(it_b->begin(), it_b->end());
-    }
-    std::cout<<std::endl;
+    timeval start, end;
+    long microseconds;
+    gettimeofday(&start, NULL);
+    size_of_ele_vect = 1;
+    save_odd_vect = -1;
+    vect_vect_int pairs;
+    std::istringstream iss(range);
+    int num;
+    while(iss >> num)
+        all_num_vect.push_back(num);
+    if(iss.eof() == num)
+            throw std::runtime_error("Error");
+    size_t size = all_num_vect.size();
+    std::cout<<"Before: ";
+    print_container_vect(all_num_vect.begin(), all_num_vect.end());
+    merge_insert_sort_vect(0, pairs);
+    std::cout<<"after:  ";
+    print_container_vect(all_num_vect.begin(), all_num_vect.end());
+    // is_sorted_vect(all_num_vect.begin(), all_num_vect.end(), size);
+    // std::cout<<number_of_comparaison_vect<<std::endl;
+    gettimeofday(&end, NULL);
+    microseconds = (end.tv_usec - start.tv_usec);
+    std::cout << "Time to process a range of " << size << " elements with std::vector : "<<std::fixed << std::setprecision(5) << microseconds / 1000000.0 << " us" << std::endl;
+}
+
+//*******************************************************************************//
+//*******************************        List    ******************************//
+//*******************************************************************************//
+
+int number_of_comparaison_list = 0;
+
+void    PmergeMe::print_pend_list()
+{
     std::cout<<"pend : "<<std::endl;;
-    for (std::deque<std::deque<int> >::iterator it_b= pend.begin(); it_b != pend.end(); std::advance(it_b, 1))
+    for (list_pair::iterator it = pend_list.begin(); it != pend_list.end(); std::advance(it, 1))
     {
-        print_container(it_b->begin(), it_b->end());
+        std::cout<<"first : ";
+        print_container_list(it->first.begin(), it->first.end());
+        std::cout<<"second : ";
+
+        if(it->second == main_chaine_list.end())
+            std::cout<<"end"<<std::endl;
+        else
+            print_container_list(it->second->begin(), it->second->end());
     }
     std::cout<<std::endl;
 }
 
-void PmergeMe::part_of_insertion(std::deque<std::deque<int> > &pairs)
-{
-    if (all_num.size() % 2 != 0)
-    {
-        save_odd = all_num.back();
-        all_num.pop_back();
-    }
-    size_of_ele /= 2;
-    pairs = make_pairs(all_num);
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
-    {
-        std::cout<<"pair before insertion : ";
-       print_container(it_b->begin(), it_b->end());
-    }
-    creat_main_and_pend(pairs);
-    insert_pend_in_main(main_chaine, pend);
-    copy_db_cont_to_one(main_chaine);
-}
-
-void PmergeMe::merge_insert_sort(std::deque<std::deque<int> > pairs)
-{
-    if (all_num.size() % 2 != 0)
-    {
-        save_odd = all_num.back();
-        all_num.pop_back();
-    }
-    pairs = make_pairs(all_num);
-    
-    std::cout<<"pairs : "<<std::endl;
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
-       print_container(it_b->begin(), it_b->end());
-    std::cout<<std::endl;
-
-    
-    sort_pairs(pairs);
-
-    for (std::deque<std::deque<int> >::iterator it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
-    {
-        std::cout<<"pair after sorting : ";
-       print_container(it_b->begin(), it_b->end());
-    }
-    std::cout<<std::endl;
-
-    size_of_ele *= 2;
-    copy_db_cont_to_one(pairs);
-    std::cout<<"all_num : ";
-    print_container(all_num.begin(), all_num.end());
-
-    if(pairs_with_same_ele(pairs) > 3)
-        merge_insert_sort(pairs);
-    
-
-    part_of_insertion(pairs);
-    
-}
-
-void PmergeMe::print_container(std::deque<int>::iterator first, std::deque<int>::iterator last)
+void PmergeMe::print_container_list(list_int_iter first, list_int_iter last)
 {
     for (; first != last; ++first) {
         std::cout<<*first<<" ";
@@ -257,22 +306,244 @@ void PmergeMe::print_container(std::deque<int>::iterator first, std::deque<int>:
     std::cout<<std::endl;
 }
 
-PmergeMe::PmergeMe(std::string range)
+void PmergeMe::print_pairs_list(list_list_int pairs)
 {
-    size_of_ele = 1;
-    save_odd = -1;
-    std::deque<std::deque<int> > pairs;
+    std::cout<<"pairs : "<<std::endl;
+    for (list_list_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+       print_container_list(it_b->begin(), it_b->end());
+    std::cout<<std::endl;
+}
+void    PmergeMe::print_mainchain_list()
+{
+    std::cout<<"_list : "<<std::endl;;
+    for (list_list_int_iter it_b= main_chaine_list.begin(); it_b != main_chaine_list.end(); std::advance(it_b, 1))
+    {
+        print_container_list(it_b->begin(), it_b->end());
+    }
+    std::cout<<std::endl;
+}
+
+
+int cal_size_list(list_int_iter first, list_int_iter last)
+{
+    int index = 0;
+    for (; first != last; ++first)
+        index++;
+    return(index);
+}
+
+void is_sorted_list(list_int_iter first, list_int_iter last, size_t size)
+{
+    size_t s = cal_size_list(first, last);
+    if(s != size)
+    {
+        std::cout<<"size deff"<<std::endl;
+        return;
+    }
+    for (; first != std::prev(last) ; ++first)
+    {
+        if(*first > *std::next(first))
+        {
+            std::cout<<"\nNO"<<std::endl;
+            return;
+        }
+    }
+    std::cout<<"\nYES"<<std::endl;
+}
+
+list_list_int PmergeMe::make_pairs_list(list_int& all_num)
+{
+    list_list_int pairs;
+    list_int_iter it_for_incre;
+    list_int_iter it_b = all_num.begin();
+    for (; std::distance(it_b, all_num.end()) >= size_of_ele_list; std::advance(it_b, size_of_ele_list))
+    {
+        if (std::distance(it_b, all_num.end()) >= size_of_ele_list)
+        {
+            it_for_incre = it_b;
+            std::advance(it_for_incre, size_of_ele_list);
+            list_int pair(it_b, it_for_incre);
+            pairs.push_back(pair);
+        }
+    }
+    if (it_b != all_num.end())
+    {
+        list_int pair(it_b, all_num.end());
+        pairs.push_back(pair);
+    }
+    return pairs;
+}
+
+void PmergeMe::sort_pairs_list(list_list_int &pairs)
+{
+    for (list_list_int_iter it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= 2; std::advance(it_b, 2))
+    {
+            number_of_comparaison_list ++;
+        if (it_b->back() > std::next(it_b)->back() && cal_size_list(it_b->begin(), it_b->end()) == cal_size_list(std::next(it_b)->begin(), std::next(it_b)->end()))
+        {
+            std::swap(*(it_b), *std::next(it_b));
+        }
+    }
+}
+
+void PmergeMe::copy_db_cont_to_one_list(list_list_int pairs)
+{
+    all_num_list.clear();
+    for (list_list_int_iter it_b= pairs.begin(); it_b != pairs.end(); std::advance(it_b, 1))
+    {
+        for (list_int_iter it_b1= it_b->begin(); it_b1 != it_b->end(); std::advance(it_b1, 1)) 
+            all_num_list.push_back(*it_b1);
+    }
+    if (save_odd_list >= 0)
+    {
+        all_num_list.push_back(save_odd_list);
+        save_odd_list = -1;
+    }
+}
+
+int PmergeMe::pairs_with_same_ele_list(list_list_int pairs)
+{
+    int num_of_pairs = 0;
+
+    for (list_list_int_iter it_b= pairs.begin(); it_b != pairs.end() ; std::advance(it_b, 1))
+    {
+        if (it_b->size()*2  == static_cast<size_t>(size_of_ele_list)) 
+            num_of_pairs++;
+    }
+    return num_of_pairs;
+}
+
+
+bool compareBack_list(const list_int& a, const int& b) 
+{
+    number_of_comparaison_list++;
+    return a.back() <= b;
+}
+
+
+void PmergeMe::creat_main_and_pend_list(list_list_int &pairs)
+{   
+    std::pair<std::list<int>, list_list_int_iter> pair;
+    list_list_int_iter it_b = pairs.begin();
+    list_list_int_iter sv_iter;
+    pend_list.clear();
+    main_chaine_list.clear();
+    main_chaine_list.insert(main_chaine_list.end(), *it_b);
+    ++it_b;
+    main_chaine_list.insert(main_chaine_list.end(), *it_b);
+    ++it_b;
+    for (; it_b != pairs.end(); ++it_b)
+    {
+        sv_iter = main_chaine_list.end();
+        pair.first = *it_b;
+        if (static_cast<size_t>(size_of_ele_list) == it_b->size() && std::next(it_b) != pairs.end())
+        {
+            ++it_b;
+            sv_iter = main_chaine_list.insert(main_chaine_list.end(), *it_b);
+        }
+        pair.second = sv_iter;
+        pend_list.push_back(pair);
+    }
+}
+
+void PmergeMe::insert_pend_in_main_list()
+{   
+    list_pair::iterator it_b = pend_list.begin();
+    list_pair::iterator save_erase;
+    list_list_int_iter pos;
+    list_list_int_iter it_b_m;
+    
+    while (it_b != pend_list.end()) 
+    {
+        if (main_chaine_list.front().size() == it_b->first.size())
+        {
+            it_b_m = std::lower_bound(main_chaine_list.begin(), it_b->second, it_b->first.back(), compareBack_list);
+            pos = main_chaine_list.insert(it_b_m, it_b->first);
+        }
+        else {
+            
+            main_chaine_list.insert(main_chaine_list.end(), it_b->first);
+        }
+        it_b++;
+    }
+}
+
+void PmergeMe::part_of_insertion_list(list_list_int &pairs)
+{
+    if (all_num_list.size() % 2 != 0)
+    {
+        save_odd_list = all_num_list.back();
+        all_num_list.pop_back();
+    }
+    size_of_ele_list /= 2;
+    pairs = make_pairs_list(all_num_list);
+    if(save_odd_list >= 0 && size_of_ele_list == 1)
+    {
+        list_int pair;
+        pair.push_back(save_odd_list);
+        pairs.push_back(pair);
+        save_odd_list = -1;
+    }
+    creat_main_and_pend_list(pairs);
+    insert_pend_in_main_list();
+    copy_db_cont_to_one_list(main_chaine_list);
+}
+
+
+void PmergeMe::merge_insert_sort_list(int depth, list_list_int pairs)
+{
+    if (all_num_list.size() % 2 != 0)
+    {
+        save_odd_list = all_num_list.back();
+        all_num_list.pop_back();
+    }
+    pairs = make_pairs_list(all_num_list);
+    sort_pairs_list(pairs);
+    size_of_ele_list *= 2;
+    copy_db_cont_to_one_list(pairs);
+    if(pairs_with_same_ele_list(pairs) > 3)
+        merge_insert_sort_list(depth + 1, pairs);
+    part_of_insertion_list(pairs);
+}
+
+void PmergeMe::part_of_list(std::string range)
+{   
+    timeval start, end;
+    long microseconds;
+    gettimeofday(&start, NULL);
+    size_of_ele_list = 1;
+    save_odd_list = -1;
+    list_list_int pairs;
     std::istringstream iss(range);
     int num;
     while(iss >> num)
-        all_num.push_back(num);
+        all_num_list.push_back(num);
     if(iss.eof() == num)
             throw std::runtime_error("Error");
-    size_t size = all_num.size();
-    merge_insert_sort(pairs);
-    print_container(all_num.begin(), all_num.end());
-    is_sorted(all_num.begin(), all_num.end(), size);
-    std::cout<<number_of_comparaison<<std::endl;
+    size_t size = all_num_list.size();
+    merge_insert_sort_list(0, pairs);
+    // is_sorted_list(all_num_list.begin(), all_num_list.end(), size);
+    // std::cout<<number_of_comparaison_list<<std::endl;
+    gettimeofday(&end, NULL);
+    microseconds = (end.tv_usec - start.tv_usec);
+    std::cout << "Time to process a range of " << size << " elements with std::list   : "<<std::fixed << std::setprecision(5)<< microseconds / 1000000.0 << " us" << std::endl;
+}
+
+
+
+//*******************************************************************************//
+//*******************************        Commun    ******************************//
+//*******************************************************************************//
+
+
+PmergeMe::PmergeMe(std::string range)
+{
+    
+    
+    part_of_vect(range);
+    
+   
+    part_of_list(range);
 }
 
 PmergeMe::~PmergeMe(){}
