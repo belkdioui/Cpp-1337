@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/24 17:10:58 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:23:24 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ Iterator my_next(Iterator it) {
     std::advance(it, 1);
     return it;
 }
+
+template <typename Iterator>
+Iterator my_prev(Iterator it) {
+    std::advance(it, -1);
+    return it;
+}
+
 
 int number_of_comparaison_vect = 0;
 
@@ -343,7 +350,7 @@ void is_sorted_list(list_int_iter first, list_int_iter last, size_t size)
         std::cout<<"size deff"<<std::endl;
         return;
     }
-    for (; first != std::prev(last) ; ++first)
+    for (; first != my_prev(last) ; ++first)
     {
         if(*first > *my_next(first))
         {
