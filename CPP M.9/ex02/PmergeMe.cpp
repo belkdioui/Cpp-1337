@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/24 17:23:24 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:55:27 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,10 +183,14 @@ void PmergeMe::creat_main_and_pend_vect(vect_vect_int &pairs)
     main_chaine_vect.clear();
     main_chaine_vect.reserve(pairs.size());
     pend_vect.reserve(pairs.size());
+
     main_chaine_vect.insert(main_chaine_vect.end(), *it_b);
     ++it_b;
-    main_chaine_vect.insert(main_chaine_vect.end(), *it_b);
-    ++it_b;
+    if(pairs.end() != it_b)
+    {
+        main_chaine_vect.insert(main_chaine_vect.end(), *it_b);
+        ++it_b;
+    }
     for (; it_b != pairs.end(); ++it_b)
     {
         sv_iter = main_chaine_vect.end();
@@ -229,6 +233,7 @@ void PmergeMe::part_of_insertion_vect(vect_vect_int &pairs)
         save_odd_vect = all_num_vect.back();
         all_num_vect.pop_back();
     }
+
     size_of_ele_vect /= 2;
     pairs = make_pairs_vect(all_num_vect);
     if(save_odd_vect >= 0 && size_of_ele_vect == 1)
@@ -250,6 +255,7 @@ void PmergeMe::merge_insert_sort_vect(int depth, vect_vect_int pairs)
         save_odd_vect = all_num_vect.back();
         all_num_vect.pop_back();
     }
+
     pairs = make_pairs_vect(all_num_vect);
     sort_pairs_vect(pairs);
     size_of_ele_vect *= 2;
@@ -270,8 +276,6 @@ void PmergeMe::part_of_vect(std::string range)
     int num;
     while(iss >> num)
         all_num_vect.push_back(num);
-    if(iss.eof() == num)
-            throw std::runtime_error("Error");
     size_t size = all_num_vect.size();
     std::cout<<"Before: ";
     print_container_vect(all_num_vect.begin(), all_num_vect.end());
@@ -440,8 +444,11 @@ void PmergeMe::creat_main_and_pend_list(list_list_int &pairs)
     main_chaine_list.clear();
     main_chaine_list.insert(main_chaine_list.end(), *it_b);
     ++it_b;
-    main_chaine_list.insert(main_chaine_list.end(), *it_b);
-    ++it_b;
+    if(pairs.end() != it_b)
+    {
+        main_chaine_list.insert(main_chaine_list.end(), *it_b);
+        ++it_b;
+    }
     for (; it_b != pairs.end(); ++it_b)
     {
         sv_iter = main_chaine_list.end();
@@ -528,8 +535,6 @@ void PmergeMe::part_of_list(std::string range)
     int num;
     while(iss >> num)
         all_num_list.push_back(num);
-    if(iss.eof() == num)
-            throw std::runtime_error("Error");
     size_t size = all_num_list.size();
     merge_insert_sort_list(0, pairs);
     // is_sorted_list(all_num_list.begin(), all_num_list.end(), size);
@@ -548,11 +553,7 @@ void PmergeMe::part_of_list(std::string range)
 
 PmergeMe::PmergeMe(std::string range)
 {
-    
-    
     part_of_vect(range);
-    
-   
     part_of_list(range);
 }
 
