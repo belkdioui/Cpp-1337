@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/24 15:44:35 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:55:35 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 //*******************************************************************************//
 //*******************************        Vector    ******************************//
 //*******************************************************************************//
+
+template <typename Iterator>
+Iterator my_next(Iterator it) {
+    std::advance(it, 1);
+    return it;
+}
 
 int number_of_comparaison_vect = 0;
 
@@ -81,7 +87,7 @@ void is_sorted_vect(vect_int_iter first, vect_int_iter last, size_t size)
     }
     for (; first != last - 1 ; ++first)
     {
-        if(*first > *std::next(first))
+        if(*first > *my_next(first))
         {
             std::cout<<"\nNO"<<std::endl;
             return;
@@ -115,9 +121,9 @@ void PmergeMe::sort_pairs_vect(vect_vect_int &pairs)
     for (vect_vect_int_iter it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= 2; std::advance(it_b, 2))
     {
             number_of_comparaison_vect ++;
-        if (it_b->back() > std::next(it_b)->back() && cal_size_vect(it_b->begin(), it_b->end()) == cal_size_vect(std::next(it_b)->begin(), std::next(it_b)->end()))
+        if (it_b->back() > my_next(it_b)->back() && cal_size_vect(it_b->begin(), it_b->end()) == cal_size_vect(my_next(it_b)->begin(), my_next(it_b)->end()))
         {
-            std::swap(*(it_b), *std::next(it_b));
+            std::swap(*(it_b), *my_next(it_b));
         }
     }
 }
@@ -181,7 +187,7 @@ void PmergeMe::creat_main_and_pend_vect(vect_vect_int &pairs)
     {
         sv_iter = main_chaine_vect.end();
         pair.first = *it_b;
-        if (static_cast<size_t>(size_of_ele_vect) == it_b->size() && std::next(it_b) != pairs.end())
+        if (static_cast<size_t>(size_of_ele_vect) == it_b->size() && my_next(it_b) != pairs.end())
         {
             ++it_b;
             sv_iter = main_chaine_vect.insert(main_chaine_vect.end(), *it_b);
@@ -342,7 +348,7 @@ void is_sorted_list(list_int_iter first, list_int_iter last, size_t size)
     }
     for (; first != std::prev(last) ; ++first)
     {
-        if(*first > *std::next(first))
+        if(*first > *my_next(first))
         {
             std::cout<<"\nNO"<<std::endl;
             return;
@@ -379,9 +385,9 @@ void PmergeMe::sort_pairs_list(list_list_int &pairs)
     for (list_list_int_iter it_b= pairs.begin(); std::distance(it_b, pairs.end()) >= 2; std::advance(it_b, 2))
     {
             number_of_comparaison_list ++;
-        if (it_b->back() > std::next(it_b)->back() && cal_size_list(it_b->begin(), it_b->end()) == cal_size_list(std::next(it_b)->begin(), std::next(it_b)->end()))
+        if (it_b->back() > my_next(it_b)->back() && cal_size_list(it_b->begin(), it_b->end()) == cal_size_list(my_next(it_b)->begin(), my_next(it_b)->end()))
         {
-            std::swap(*(it_b), *std::next(it_b));
+            std::swap(*(it_b), *my_next(it_b));
         }
     }
 }
@@ -436,7 +442,7 @@ void PmergeMe::creat_main_and_pend_list(list_list_int &pairs)
     {
         sv_iter = main_chaine_list.end();
         pair.first = *it_b;
-        if (static_cast<size_t>(size_of_ele_list) == it_b->size() && std::next(it_b) != pairs.end())
+        if (static_cast<size_t>(size_of_ele_list) == it_b->size() && my_next(it_b) != pairs.end())
         {
             ++it_b;
             sv_iter = main_chaine_list.insert(main_chaine_list.end(), *it_b);
