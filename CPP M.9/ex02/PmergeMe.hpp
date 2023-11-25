@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:19:00 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/24 15:14:31 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:07:21 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ class PmergeMe{
         void print_pairs_list(list_list_int pairs);
         void part_of_list(std::string range);
         // ******************************* commun ******************************//
-        PmergeMe(std::string range);
+        PmergeMe(char **av);
+        std::string check_errors(char **av);
         ~PmergeMe();
 
     

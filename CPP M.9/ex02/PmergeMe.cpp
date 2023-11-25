@@ -6,11 +6,14 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:46:04 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/24 17:55:27 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:27:21 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <cctype>
+#include <stdexcept>
+#include <string>
 
 //*******************************************************************************//
 //*******************************        Vector    ******************************//
@@ -211,18 +214,44 @@ void PmergeMe::insert_pend_in_main_vect()
     vect_pair::iterator save_erase;
     vect_vect_int_iter pos;
     vect_vect_int_iter it_b_m;
+    vect_pair::iterator start;
+    vect_pair::iterator end;
+    int idx = 0;
+    long int jacob_stl[] = {
+        2, 2, 6, 10, 22, 42, 86, 170, 342, 682, 1366,
+        2730, 5462, 10922, 21846, 43690, 87382, 174762, 349526, 699050,
+        1398102, 2796202, 5592406, 11184810, 22369622, 44739242, 89478486,
+        178956970, 357913942, 715827882, 1431655766, 2863311530, 5726623062,
+        11453246122, 22906492246, 45812984490
+    };
     
     while (it_b != pend_vect.end()) 
     {
-        if (main_chaine_vect.front().size() == it_b->first.size())
+        start = pend_vect.begin();
+        end = pend_vect.begin();
+        for (int i = 0; i < jacob_stl[idx] - 1 && start != pend_vect.end(); ++i)
+			++start;
+		if (start == pend_vect.end())
+			--start;
+        while(true)
         {
-            it_b_m = std::lower_bound(main_chaine_vect.begin(), it_b->second, it_b->first.back(), compareBack_vect);
-            pos = main_chaine_vect.insert(it_b_m, it_b->first);
-            update_iter_vect(pos); 
+            if (main_chaine_vect.front().size() == start->first.size())
+            {
+                it_b_m = std::lower_bound(main_chaine_vect.begin(), start->second, start->first.back(), compareBack_vect);
+                pos = main_chaine_vect.insert(it_b_m, start->first);
+                pend_vect.erase(start);
+                update_iter_vect(pos); 
+            }
+            else
+            {
+                main_chaine_vect.insert(main_chaine_vect.end(), start->first);
+                pend_vect.erase(start);
+            }
+            if (start == end)
+				break ;
+			--start;
         }
-        else
-            main_chaine_vect.insert(main_chaine_vect.end(), it_b->first);
-        it_b++;
+        idx++;
     }
 }
 
@@ -267,7 +296,7 @@ void PmergeMe::merge_insert_sort_vect(int depth, vect_vect_int pairs)
 void PmergeMe::part_of_vect(std::string range)
 {   
     timeval start, end;
-    long microseconds;
+    long microseconds, seconds ,totaltime;
     gettimeofday(&start, NULL);
     size_of_ele_vect = 1;
     save_odd_vect = -1;
@@ -282,11 +311,18 @@ void PmergeMe::part_of_vect(std::string range)
     merge_insert_sort_vect(0, pairs);
     std::cout<<"after:  ";
     print_container_vect(all_num_vect.begin(), all_num_vect.end());
-    // is_sorted_vect(all_num_vect.begin(), all_num_vect.end(), size);
-    // std::cout<<number_of_comparaison_vect<<std::endl;
+    is_sorted_vect(all_num_vect.begin(), all_num_vect.end(), size);
     gettimeofday(&end, NULL);
-    microseconds = (end.tv_usec - start.tv_usec);
-    std::cout << "Time to process a range of " << size << " elements with std::vector : "<<std::fixed << std::setprecision(5) << microseconds / 1000000.0 << " us" << std::endl;
+    microseconds = end.tv_usec - start.tv_usec;
+    seconds = end.tv_sec - start.tv_sec;
+    if (microseconds < 0) {
+        microseconds += 1000000;
+        seconds--;
+    }
+    totaltime = seconds * 1000000 + microseconds;
+    std::cout << "Time to process a range of " << size << " elements with std::vector : "<<std::fixed << std::setprecision(5) << totaltime / 1000000.0 << " us" << std::endl;
+    // std::cout<<"number of comparaison vect : "<<number_of_comparaison_vect<<std::endl;
+
 }
 
 //*******************************************************************************//
@@ -465,23 +501,47 @@ void PmergeMe::creat_main_and_pend_list(list_list_int &pairs)
 
 void PmergeMe::insert_pend_in_main_list()
 {   
-    list_pair::iterator it_b = pend_list.begin();
     list_pair::iterator save_erase;
     list_list_int_iter pos;
     list_list_int_iter it_b_m;
+    list_pair::iterator start;
+    list_pair::iterator end;
+    int idx = 0;
+    long int jacob_stl[] = {
+        2, 2, 6, 10, 22, 42, 86, 170, 342, 682, 1366,
+        2730, 5462, 10922, 21846, 43690, 87382, 174762, 349526, 699050,
+        1398102, 2796202, 5592406, 11184810, 22369622, 44739242, 89478486,
+        178956970, 357913942, 715827882, 1431655766, 2863311530, 5726623062,
+        11453246122, 22906492246, 45812984490
+    };
     
-    while (it_b != pend_list.end()) 
+    while (pend_list.size()) 
     {
-        if (main_chaine_list.front().size() == it_b->first.size())
+        start = pend_list.begin();
+        end = pend_list.begin();
+        for (int i = 0; i < jacob_stl[idx] - 1 && start != pend_list.end(); ++i)
+			++start;
+		if (start == pend_list.end())
+			--start;
+        while(true)
         {
-            it_b_m = std::lower_bound(main_chaine_list.begin(), it_b->second, it_b->first.back(), compareBack_list);
-            pos = main_chaine_list.insert(it_b_m, it_b->first);
+            if (main_chaine_list.front().size() == start->first.size())
+            {
+                it_b_m = std::lower_bound(main_chaine_list.begin(), start->second, start->first.back(), compareBack_list);
+                pos = main_chaine_list.insert(it_b_m, start->first);
+                pend_list.erase(start);
+            }
+            else
+            {
+                main_chaine_list.insert(main_chaine_list.end(), start->first);
+
+                pend_list.erase(start);
+            }
+            if (start == end )
+				break ;
+            --start;
         }
-        else {
-            
-            main_chaine_list.insert(main_chaine_list.end(), it_b->first);
-        }
-        it_b++;
+        idx++;
     }
 }
 
@@ -526,7 +586,7 @@ void PmergeMe::merge_insert_sort_list(int depth, list_list_int pairs)
 void PmergeMe::part_of_list(std::string range)
 {   
     timeval start, end;
-    long microseconds;
+    long microseconds, seconds ,totaltime;
     gettimeofday(&start, NULL);
     size_of_ele_list = 1;
     save_odd_list = -1;
@@ -537,11 +597,17 @@ void PmergeMe::part_of_list(std::string range)
         all_num_list.push_back(num);
     size_t size = all_num_list.size();
     merge_insert_sort_list(0, pairs);
-    // is_sorted_list(all_num_list.begin(), all_num_list.end(), size);
-    // std::cout<<number_of_comparaison_list<<std::endl;
+    is_sorted_list(all_num_list.begin(), all_num_list.end(), size);
     gettimeofday(&end, NULL);
-    microseconds = (end.tv_usec - start.tv_usec);
-    std::cout << "Time to process a range of " << size << " elements with std::list   : "<<std::fixed << std::setprecision(5)<< microseconds / 1000000.0 << " us" << std::endl;
+    microseconds = end.tv_usec - start.tv_usec;
+    seconds = end.tv_sec - start.tv_sec;
+    if (microseconds < 0) {
+        microseconds += 1000000;
+        seconds--;
+    }
+    totaltime = seconds * 1000000 + microseconds;
+    std::cout << "Time to process a range of " << size << " elements with std::list   : "<<std::fixed << std::setprecision(5)<< totaltime / 1000000.0 << " us" << std::endl;
+    // std::cout<<"number of comparaison list : "<<number_of_comparaison_list<<std::endl;
 }
 
 
@@ -550,9 +616,33 @@ void PmergeMe::part_of_list(std::string range)
 //*******************************        Commun    ******************************//
 //*******************************************************************************//
 
-
-PmergeMe::PmergeMe(std::string range)
+int ft_strlen(char *av)
 {
+    int i = 0;
+    while(av[i])
+        i++;
+    return i;
+}
+
+std::string PmergeMe::check_errors(char **av)
+{
+    std::string range;
+    for (int i = 1; av[i]; i++) {
+        if(ft_strlen(av[i]) == 0)
+            throw std::runtime_error("Error");
+        for (int j = 0; av[i][j]; j++) {
+            if(!std::isdigit(av[i][j]))
+                throw std::runtime_error("Error");
+        }
+            range.append(av[i]);
+            range.append(" ");
+    }
+    return range;
+}
+
+PmergeMe::PmergeMe(char **av)
+{
+    std::string range = check_errors(av);
     part_of_vect(range);
     part_of_list(range);
 }

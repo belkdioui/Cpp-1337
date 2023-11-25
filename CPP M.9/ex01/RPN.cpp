@@ -6,7 +6,7 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:09:08 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/15 16:19:20 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:30:33 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ std::string result_operation(std::string str1, std::string str2, std::string ope
 	else if (ope == "/")
 		res = num1 / num2;
     ss<<res;
-	// std::cout<<num1<<ope<<num2<<"="<<res<<std::endl;
     std::string result=ss.str();
 	return result;
 }
@@ -66,7 +65,6 @@ void calculate(std::stack<std::string>st_1, std::stack<std::string>st_2,int inde
 			{
 				st_2.push(top_ele_st1);
 				index++;
-				// std::cout<<"here1"<<std::endl;
 				calculate(st_1, st_2, index);
 			}
 			else if (index > 0 && !st_1.empty() && !st_2.empty())
@@ -76,7 +74,6 @@ void calculate(std::stack<std::string>st_1, std::stack<std::string>st_2,int inde
 				st_2.pop();
 				st_1.push(result);
 				index++;
-				// std::cout<<"here2"<<std::endl;
 				calculate(st_1, st_2, index);
 			}
 			else {
