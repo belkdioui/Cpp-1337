@@ -6,11 +6,16 @@
 /*   By: bel-kdio <bel-kdio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 21:33:51 by bel-kdio          #+#    #+#             */
-/*   Updated: 2023/11/19 11:58:59 by bel-kdio         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:09:34 by bel-kdio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <cstdio>
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
+#include <string>
 
 int date_error_and_printing(std::string& date)
 {
@@ -25,8 +30,12 @@ int date_error_and_printing(std::string& date)
             throw std::runtime_error(date);
         if(date.find(" ") != date.size() - 1 || sep1 != '-' || sep2 != '-')
             throw std::runtime_error(date);
-        if((month > 0 && month < 13) && (day > 0 && day <= 31) && (year > 2009 && year < 2023))
+        if((month > 0 && month < 13) && (day > 0 && day <= 31) && (year >= 2009 && year < 2023))
         {
+            if(year == 2009 && month == 1 && day < 2)
+                throw std::runtime_error(date);
+            if(year == 2022 && ((month == 3 && day > 29) || month > 3))
+                throw std::runtime_error(date);
             if(!(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12))
             {
                 if(month == 2)
@@ -52,7 +61,7 @@ int date_error_and_printing(std::string& date)
 void BitcoinExchange::value_error_and_printing(std::string& date,std::string& value)
 {
     try {
-        float v;
+        float  v;
         int spc = 0;
         std::istringstream iss(value);
         
@@ -65,18 +74,16 @@ void BitcoinExchange::value_error_and_printing(std::string& date,std::string& va
         {
             if(iss>>v)
             {
-                if(v >= (float)INT_MAX)
+                if(v >= 1000)
                     throw std::runtime_error("Error: too large a number.");
                 else if (v < 0)
                     throw std::runtime_error("Error: not a positive number.");
                 else
                 {
                     std::map<std::string, float>::iterator it = exchange.end();
-                    // date.pop_back();
                     it--;
                     for (; it != exchange.begin(); --it) 
                     {
-                        // std::cout<<date<<" "<<it->first<<std::endl;
                         if (date >= it->first)
                         {
                             std::cout<< date<< " => "<<v<<" = "<<it->second * v<<std::endl;
@@ -84,9 +91,7 @@ void BitcoinExchange::value_error_and_printing(std::string& date,std::string& va
                         }
                     }
                     if (it == exchange.begin() && date >= it->first)
-                    {
                         std::cout << date << " => " << v << " = " << it->second * v << std::endl;
-                    }
                 }
             }
             else
@@ -132,16 +137,16 @@ BitcoinExchange::~BitcoinExchange(){}
 
 void BitcoinExchange::fill_db()
 {
-    exchange["2009-01-01"]=0.7;
-    exchange["2011-01-03"]=0.3;
-    exchange["2011-01-04"]=1;
-    exchange["2011-01-05"]=2;
-    exchange["2011-01-06"]=2.34;
-    exchange["2011-01-07"]=5.35;
-    exchange["2011-01-08"]=3.33;
-    exchange["2011-01-09"]=0.32;
-    exchange["2011-01-10"]=5;
-    exchange["2011-01-11"]=7;
-    exchange["2011-01-12"]=1;
-    exchange["2023-01-12"]=0.5;
+    std::string line;
+    std::string date;
+    float value;
+    std::ifstream in("data.csv");
+    if(!in.is_open())
+        throw std::runtime_error("there's no db ");
+    while (std::getline(in, line)) {
+        std::istringstream iss(line);
+        while (std::getline(iss, date, ',') >> value) {
+            exchange[date] = value;
+        }
+    }
 }
